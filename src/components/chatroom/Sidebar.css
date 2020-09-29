@@ -1,26 +1,52 @@
 .sidebar{
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
     display:flex;
-    flex-direction: column;
-    flex:0.35
+    flex-direction: row;
+    flex:0.25;
+    padding:15px;
+    background-color: #f9f9fc;
 }
 
 .sidebar__header{
+    background-color: #4849a1;
     display:flex;
-    justify-content: space-between;
+    flex-direction:column;
     padding: 20px;
-    border-right: 1px solid #ebebeb;
+    border-radius: 20px;
+    flex:0.05;
+}
+
+.avatar__container {
+    padding: 5px;
+}
+.avatar__icon {
+    font-size: 28px !important;
+    padding:5px
 }
 
 .sidebar__headerRight{
     display:flex;
+    flex-direction: column;
     align-items: center;
     justify-content:space-between;
-    min-width: 10vw;
+    margin-top: 10vh;
+}
+
+.action_button:hover {
+    color:white !important;
 }
 
 .sidebar__headerRight > .MuiSvgIcon-root {
-    margin-right:2vw;
     font-size: 24px !important;
+}
+
+.sidebar__right{
+    display:flex;
+    flex-direction: column;
+    flex:0.95;
+    margin-left: 10px;
+    margin-top: 5px;
 }
 
 .sidebar__search {
@@ -28,7 +54,7 @@
     align-items: center;
     background-color:#f6f6f6;
     height:39px;
-    padding:10px;
+    border-radius: 30px;
 }
 
 .sidebar__searchContainer{
@@ -36,7 +62,7 @@
     align-items: center;
     background-color: white;
     width:100%;
-    height:35px;
+    height:45px;
     border-radius:20px;
 }
 
@@ -49,10 +75,22 @@
     border:none;
     outline-width:0;
     margin-left:10px;
+    width: 100%;
 }
 
 .sidebar__chats{
-    flex: 1;
-    background-color: white;
-    overflow: scroll;
+    background-color:#f9f9fc;
+    overflow-y: scroll;
+    margin-top: 20px;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.sidebar__chats::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  ..sidebar__chats {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }

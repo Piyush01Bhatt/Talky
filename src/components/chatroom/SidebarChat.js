@@ -5,10 +5,10 @@ import { Avatar } from '@material-ui/core'
 function SidebarChat({onClick,roomName,roomId}) {
     return (
         <div className="sidebarChat" onClick={onClick}>
-            <Avatar/>
+            <Avatar className="sidebarChat__avatar"/>
             <div className="sidebarChat__info">
                 <h2>{roomName}</h2>
-                <p>This is the last message.</p>
+                <p>This is the last message .</p>
             </div>
         </div>
     )
