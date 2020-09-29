@@ -13,7 +13,7 @@ export function SocketProvider({id, user, children}) {
     const [state,dispatch] = useStateValue()
 
     useEffect(()=>{
-        const newSocket = io(
+        /*const newSocket = io(
             "http://localhost:8001", 
             { query: { id } }
         );
@@ -24,7 +24,7 @@ export function SocketProvider({id, user, children}) {
             item:user
         })
 
-        return () => newSocket.close()
+        return () => newSocket.close()*/
     }, [id])
 
     return (
