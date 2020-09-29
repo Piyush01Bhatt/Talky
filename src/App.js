@@ -12,8 +12,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoginActive: false,
-      isChatroomActive: true,
+      isLoginActive: true,
+      isChatroomActive: false,
       user: {},
       loginEmail: "",
       loginPwd: "",
