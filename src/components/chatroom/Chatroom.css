@@ -1,8 +1,8 @@
 
 .chatroom__body {
   display: flex;
-  border-radius: 25px ;
-  background-color: #ededed;
+  border-radius: 30px ;
+  background-color: white;
   margin-top: -0px;
   height:90vh;
   width:85vw;

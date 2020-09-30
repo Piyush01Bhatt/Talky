@@ -3,8 +3,9 @@
     font-size: 16px;
     padding:10px;
     width: fit-content;
-    border-radius:10px;
-    background-color:#dcf8c6;
+    border-bottom-right-radius: 15px;
+    border-top-left-radius: 10px;
+    background-color:#f8dadc;
     margin-left: auto;
     margin-bottom: 30px;
 }

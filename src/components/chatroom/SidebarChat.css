@@ -6,13 +6,11 @@
     align-items: center;
 }
 
-.sidebarChat__avatar{
-    padding:3px;
-}
-
 .sidebarChat:hover {
     /*background-color:#ebebeb*/
-    background-color: #f8dadc;
+    border-left: 3px solid red;
+    /*background-color: #f8dadc;*/
+    background-image: linear-gradient(to right,#f8d9db,#f9f9fc);
 }
 
 .sidebarChat__info > h2 {

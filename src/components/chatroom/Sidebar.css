@@ -9,11 +9,12 @@
 }
 
 .sidebar__header{
+    /*background-color: #4849a1;*/
     background-color: #4849a1;
     display:flex;
     flex-direction:column;
-    padding: 20px;
-    border-radius: 20px;
+    padding: 8px;
+    border-radius: 25px;
     flex:0.05;
 }
 
@@ -45,7 +46,7 @@
     display:flex;
     flex-direction: column;
     flex:0.95;
-    margin-left: 10px;
+    margin-left: 5px;
     margin-top: 5px;
 }
 
@@ -54,6 +55,7 @@
     align-items: center;
     background-color:#f6f6f6;
     height:39px;
+    margin-left: 5px;
     border-radius: 30px;
 }
 
@@ -90,7 +92,7 @@
   }
   
   /* Hide scrollbar for IE, Edge and Firefox */
-  ..sidebar__chats {
+  .sidebar__chats {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }

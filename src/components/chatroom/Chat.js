@@ -28,7 +28,7 @@ function Chat({ sendMessage }) {
   return (
     <div className="chat">
       <div className="chat__header">
-        <Avatar />
+        <Avatar className="chat__header__avatar"/>
         <div className="chat__headerInfo">
           <h3>{room.name}</h3>
           <p>Last seen at...</p>

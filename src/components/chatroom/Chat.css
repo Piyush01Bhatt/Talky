@@ -1,14 +1,24 @@
 .chat{
     display:flex;
     flex-direction: column;
-    flex:0.75
+    flex:0.75;
+    padding:15px;
 }
 
 .chat__header {
-    padding: 20px;
+    padding: 5px;
+    border-radius: 25px;
     display: flex;
     align-items:center;
+    background-color:white;
+    position:sticky;
     border-bottom: 1px solid lightgray;
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.35);
+}
+
+.chat__header__avatar{
+    margin-left: 5px;
+    font-size: 10px !important;
 }
 
 .chat__headerInfo {
@@ -27,19 +37,33 @@
 
 .chat__body {
     flex:1;
-    background-image: url("./images/wats-app.png");
+    /*background-image: url("./images/wats-app.png");*/
+    background-color: white;
     background-repeat: repeat;
     background-position:center;
     padding:30px;
     overflow: scroll;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.chat__body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+.chat__body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 .chat__footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 62px;
-    border-top: 1px solid lightgray;
+    height: 42px;
+    border: 1px solid lightgray;
+    position:sticky;
+    border-radius: 30px;
 }
 
 .chat__footer > form {
@@ -52,6 +76,11 @@
     border-radius: 30px;
     padding:10px;
     border:none;
+    /*border: 1px solid lightgray;*/
+}
+
+.chat__footer > form > input:focus {
+    outline:none !important;
 }
 
 .chat__footer > form > button {
