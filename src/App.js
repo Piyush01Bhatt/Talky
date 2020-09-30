@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "./logo.svg";
+import banner from "./manage_chats.svg"
 import "./App.scss";
 import { Login } from "./components/login";
 import { Register } from "./components/login";
@@ -7,21 +8,22 @@ import Chatroom from "./components/chatroom/Chatroom";
 import axios from "./helpers/axios";
 import { useStateValue } from "./StateProvider";
 import { SocketProvider } from "./components/chatroom/SocketProvider";
+import ReactCardFlip from 'react-card-flip';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoginActive: false,
-      isChatroomActive: true,
+      isLoginActive: true,
+      isChatroomActive: false,
       user: {},
       loginEmail: "",
       loginPwd: "",
+      isFlipped: false
     };
   }
 
   componentDidMount() {
-    this.rightSide.classList.add("right");
   }
 
   changeState() {
@@ -40,17 +42,17 @@ class App extends React.Component {
 
   processLogin = async () => {
     try {
-      let res = await axios.post("/user/login", {
+      /*let res = await axios.post("/user/login", {
         email: this.state.loginEmail,
         password: this.state.loginPwd,
       });
       const resUser = res.data.body.data;
 
-      console.log(`resUser = ${resUser.email}`);
+      console.log(`resUser = ${resUser.email}`);*/
       this.setState((prevState) => ({
         isLoginActive: false,
         isChatroomActive: !prevState.isChatroomActive,
-        user: resUser,
+        //user: resUser,
       }));
     } catch (e) {
       console.log(e.message);
@@ -66,6 +68,13 @@ class App extends React.Component {
     this.setState({ loginPwd: e.target.value });
   };
 
+  flip = () => {
+    this.setState((prevState) => ({
+      ...this.state,
+      isFlipped: !prevState.isFlipped,
+    }))
+  }
+
   render() {
     const {
       isLoginActive,
@@ -75,32 +84,48 @@ class App extends React.Component {
       loginPwd,
     } = this.state;
     const current = isLoginActive ? "Register" : "Login";
+    const flipStyle = {
+      "width": "100%",
+      "height": "100%",
+      "align-items": "center"
+    }
     return (
       <div className="app" id="talky">
-        <div className="login">
-          <div className="container">
-            {isChatroomActive && (
-              <SocketProvider id={user._id} user={user}>
-                <Chatroom user={user} />
-              </SocketProvider>
-            )}
-            {!isChatroomActive && isLoginActive && (
-              <Login
-                containerRef={(ref) => (this.current = ref)}
-                processLogin={this.processLogin}
-                processLoginEmail={this.processLoginEmail}
-                processLoginPassword={this.processLoginPassword}
-              />
-            )}
-            {!isChatroomActive && !isLoginActive && (
-              <Register containerRef={(ref) => (this.current = ref)} />
-            )}
+        <div className="app__container">
+          { isLoginActive &&
+            <div className="banner">
+              <div className="banner_image">
+                <img src={banner} alt={"banner"}></img>
+                <h1>Join and start connecting with your loved ones.</h1>
+              </div>
+            </div>
+          }
+          <div className="login">
+            <div className="container">
+              {isLoginActive &&
+                <ReactCardFlip isFlipped={this.state.isFlipped}
+                  containerStyle={flipStyle}
+                  flipDirection="horizontal"
+                >
+                  <Login
+                    containerRef={(ref) => (this.current = ref)}
+                    processLogin={this.processLogin}
+                    processLoginEmail={this.processLoginEmail}
+                    processLoginPassword={this.processLoginPassword}
+                    flip={this.flip}
+                  />
+                  <Register containerRef={(ref) => (this.current = ref)}
+                    flip={this.flip}
+                  />
+                </ReactCardFlip>
+              }
+              {isChatroomActive && (
+                <SocketProvider id={user._id} user={user}>
+                  <Chatroom user={user} />
+                </SocketProvider>
+              )}
+            </div>
           </div>
-          <RightSide
-            current={current}
-            containerRef={(ref) => (this.rightSide = ref)}
-            onClick={this.changeState.bind(this)}
-          />
         </div>
       </div>
     );

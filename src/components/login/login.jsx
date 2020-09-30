@@ -1,36 +1,38 @@
 import React from 'react';
 import loginImg from '../../login.svg'
 import './style.scss'
+import talkyLogo from '../../talky_logo.png'
 
-export   const Login = props => {
+export const Login = props => {
 
-        return (
-            <div className="base-container" ref={props.containerRef}>
-                <div className="header">Login</div>
-                <div className="content">
-                    <div className="image">
-                        <img src={loginImg} />
+    return (
+        <div className="base-container" ref={props.containerRef}>
+            <div className="topHeader">
+              <img src={talkyLogo} alt="talky"></img>
+              <button onClick={() => props.flip()}>Sign up</button>
+            </div>
+            <div className="header">
+                <h3>Login</h3>
+            </div>
+            <div className="content">
+                <div className="form">
+                    <div className="form-group">
+                        <input type="text" name="username" placeholder="username"
+                            onChange={props.processLoginEmail} />
                     </div>
-                    <div className="form">
-                        <div className="form-group">
-                            <label htmlFor="username">Username</label>
-                            <input type="text" name="username" placeholder="username" 
-                            onChange={props.processLoginEmail}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <input type="text" name="password" placeholder="password" 
-                            onChange={props.processLoginPassword}/>
-                        </div>
+                    <div className="form-group">
+                        <input type="password" name="password" placeholder="password"
+                            onChange={props.processLoginPassword} />
                     </div>
-                </div>
-                <div className="footer">
-                    <button type="button" className="btn"
-                        onClick={props.processLogin}
-                    >
-                        Login
-                    </button>
                 </div>
             </div>
-        );
-    }
+            <div className="footer">
+                <button type="button" className="btn"
+                    onClick={props.processLogin}
+                >
+                    Login
+                    </button>
+            </div>
+        </div>
+    );
+}

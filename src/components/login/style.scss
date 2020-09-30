@@ -1,10 +1,46 @@
 .base-container {
-    width:100%;
     display: flex;
+    width: 100% !important;
+    height: 100% !important;
     flex-direction: column;
     align-items:center;
+    background-color:white; 
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+
+    .topHeader{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .topHeader > button{
+        margin-right: 130px;
+        margin-bottom: 100px;
+        margin-top: 20px;
+        padding:8px;
+        height: 40px;
+        width: 6em;
+        background-color: white;
+        border:0.2px solid #e7e7e7;
+        border-radius: 5px;
+        color: #454fbe;
+        font-weight: bold;
+      }
+
+      .topHeader > img{
+          margin-top: 8px;
+          width:8em;
+          height:4em;
+          margin-left:130px;
+      }
+      
+      .topHeader > button:focus{
+        outline: none;
+      }
 
     .header {
+        display:flex;
         font-size:24px;
         font-family: "Open Sans", sans-serif;
     }
@@ -38,43 +74,42 @@
             }
             input {
                 margin-top:6px;
-                min-width:18em;
-                height:37px;
+                min-width:20em;
+                height:47px;
                 padding:0px 10px;
+                border:0.2px solid #e7e7e7;
                 font-size:16px;
                 font-family: "Open Sans", sans-serif;
-                background-color: #f3f3f3;
-                border:0;
+                background-color: white;
                 border-radius: 4px;
-                margin-bottom: 31px;
+                
                 transition: all 250mx ease-in-out;
-                &:hover {
-                    //backgound-color:#ffffff;
-                    //box-shadow:0px 0px 14px 0.3px #0e81ce96;
-                }
 
                 &:focus {
                     outline: none;
-                    box-shadow: 0px 0px 12px 0.8px #3474dbb2;
+                    /*box-shadow: 0px 0px 12px 0.8px #3474dbb2;*/
                 }
             }
         }
     }
 
     .footer {
-        margin-top:3em;
+        margin-top:2em;
 
         .btn {
-            font-size:21px;
+            
+            font-weight: bold;
             padding: 5px 20px;
             border: 0;
-            background-color: #3498db;
+            min-width: 25.5em;
+            height:47px;
+            background-color: #454fbe;
             color: #fff;
             border-radius:3px;
             transition: all 250ms ease-in-out;
             cursor:pointer;
             &:hover {
-                background-color: #2386c8;
+                background-color: #9683fb;
             }
             &:focus {
                 outline:none;

@@ -11,12 +11,12 @@
 
 .sidebar__header{
     /*background-color: #4849a1;*/
-    background-color: #4849a1;
+    background-color: #454fbe;
     display:flex;
     flex-direction:column;
-    padding: 8px;
+    padding: 15px;
     border-radius: 20px;
-    flex:0.05;
+    flex:0.10;
 }
 
 .avatar__container {
@@ -57,7 +57,7 @@
 .sidebar__right{
     display:flex;
     flex-direction: column;
-    flex:0.95;
+    flex:0.90;
     margin-left: 5px;
     margin-top: 5px;
 }
@@ -69,6 +69,8 @@
     height:39px;
     margin-left: 5px;
     border-radius: 30px;
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.35);
+    position:sticky;
 }
 
 .sidebar__searchContainer{
@@ -95,7 +97,7 @@
 .sidebar__chats{
     background-color:#f9f9fc;
     overflow-y: scroll;
-    margin-top: 20px;
+    margin-top: 8px;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
