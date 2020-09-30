@@ -5,6 +5,7 @@
     width: fit-content;
     border-bottom-left-radius: 15px;
     border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     background-color:#8b99db;
     margin-bottom: 30px;
 }

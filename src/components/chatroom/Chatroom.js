@@ -43,18 +43,18 @@ function Chatroom({ user }) {
       item: {
         to: room.id,
         message: message,
-        name: user.name,
+        name: "piyush",
       },
     });
 
     e.preventDefault();
     console.log("sending message");
-    socket.emit("send-message", {
+    /*socket.emit("send-message", {
       from: user._id,
       msg: message,
       to: room.id,
       name: user.name,
-    });
+    });*/
   };
 
   const findFriend = ()=>{

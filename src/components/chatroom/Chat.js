@@ -9,8 +9,8 @@ import {
   SettingsInputAntenna,
   MessageSharp,
 } from "@material-ui/icons";
-import ChatMessage from "./ChatMessage";
-import ChatReceiver from "./ChatReceiver";
+import ChatMessage from "./ChatReceiver";
+import ChatReceiver from "./ChatMessage";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 import axios from "../../helpers/axios";
@@ -28,34 +28,31 @@ function Chat({ sendMessage }) {
   return (
     <div className="chat">
       <div className="chat__header">
-        <Avatar className="chat__header__avatar"/>
+        <Avatar className="chat__header__avatar" />
         <div className="chat__headerInfo">
           <h3>{room.name}</h3>
           <p>Last seen at...</p>
         </div>
 
         <div className="chat__headerRight">
-          <IconButton>
+          <IconButton className="inactive__button" disabled={true}>
             <VideoCallIcon />
           </IconButton>
-          <IconButton>
+          <IconButton className="inactive__button" disabled={true}>
             <AttachFile />
-          </IconButton>
-          <IconButton>
-            <MoreVert />
           </IconButton>
         </div>
       </div>
 
       <div className="chat__body">
         {messages && messages.map((item, i) => (
-          item.name === user.name ? 
+          item.name === user.name ?
             <ChatMessage
               name={user.name}
               messageBody={item.message}
               timestamp={Date.now()}
             />
-           : 
+            :
             <ChatReceiver
               name={item.name}
               messageBody={item.message}
@@ -65,7 +62,9 @@ function Chat({ sendMessage }) {
       </div>
 
       <div className="chat__footer">
-        <InsertEmoticonIcon />
+        <IconButton className="inactive__button" disabled={true}>
+          <InsertEmoticonIcon />
+        </IconButton>
         <form>
           <input
             value={input}
@@ -80,7 +79,9 @@ function Chat({ sendMessage }) {
             Send a Message
           </button>
         </form>
-        <MicIcon />
+        <IconButton className="inactive__button" disabled={true}>
+          <MicIcon />
+        </IconButton>
       </div>
     </div>
   );

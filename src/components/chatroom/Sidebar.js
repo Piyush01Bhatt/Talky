@@ -7,6 +7,7 @@ import { IconButton, Avatar } from '@material-ui/core';
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import SidebarChat from "./SidebarChat"
 import { useStateValue } from '../../StateProvider'
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 
 function Sidebar({ user, findFriend }) {
 
@@ -30,14 +31,14 @@ function Sidebar({ user, findFriend }) {
                 </div>
 
                 <div className="sidebar__headerRight">
-                    <IconButton className="action_button">
+                    <IconButton className="inactive_button" disabled={true}>
                         <DonutLargeIcon />
                     </IconButton>
-                    <IconButton onClick={(e) => findFriend()} className="action_button">
-                        <ChatIcon />
+                    <IconButton className="inactive_button" disabled={true}>
+                        <ChatIcon/>
                     </IconButton>
-                    <IconButton className="action_button">
-                        <MoreVertIcon />
+                    <IconButton onClick={(e) => findFriend()} className="action_button">
+                        <PeopleAltIcon/>
                     </IconButton>
                 </div>
             </div>

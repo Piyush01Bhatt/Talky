@@ -26,6 +26,12 @@
     padding-left:20px;
 }
 
+.inactive__button{
+   /* color    :grey !important;
+    font-size: 25px !important;
+    background-color: white !important;*/
+}
+
 .chat__headerInfo > h3 {
     margin-bottom:3px;
     font-weight: 500;
