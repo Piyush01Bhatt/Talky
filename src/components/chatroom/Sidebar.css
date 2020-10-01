@@ -10,8 +10,8 @@
 }
 
 .sidebar__header{
-    /*background-color: #4849a1;*/
-    background-color: #454fbe;
+    background-color: #4849a1;
+    /*background-color: #454fbe;*/
     display:flex;
     flex-direction:column;
     padding: 15px;
