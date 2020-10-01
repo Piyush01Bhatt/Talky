@@ -46,7 +46,7 @@ function Chat({ sendMessage }) {
 
       <div className="chat__body">
         {messages && messages.map((item, i) => (
-          item.name === user.name ?
+          item.from_name === user.name ?
             <ChatMessage
               name={user.name}
               messageBody={item.message}
@@ -54,7 +54,7 @@ function Chat({ sendMessage }) {
             />
             :
             <ChatReceiver
-              name={item.name}
+              name={item.to_name}
               messageBody={item.message}
               timestamp={Date.now()}
             />

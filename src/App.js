@@ -42,18 +42,21 @@ class App extends React.Component {
 
   processLogin = async () => {
     try {
-      /*let res = await axios.post("/user/login", {
+      let res = await axios.post("/user/login", {
         email: this.state.loginEmail,
         password: this.state.loginPwd,
       });
       const resUser = res.data.body.data;
-
-      console.log(`resUser = ${resUser.email}`);*/
+      if(! resUser._id){
+        throw new Error('undefined id received')
+      }
+      console.log(`resUser = ${resUser}`);
       this.setState((prevState) => ({
         isLoginActive: false,
         isChatroomActive: !prevState.isChatroomActive,
-        //user: resUser,
+        user: resUser,
       }));
+
     } catch (e) {
       console.log(e.message);
       alert("login failed");
@@ -79,11 +82,8 @@ class App extends React.Component {
     const {
       isLoginActive,
       isChatroomActive,
-      user,
-      loginEmail,
-      loginPwd,
+      user
     } = this.state;
-    const current = isLoginActive ? "Register" : "Login";
     const flipStyle = {
       "width": "100%",
       "height": "100%",
@@ -131,19 +131,5 @@ class App extends React.Component {
     );
   }
 }
-
-const RightSide = (props) => {
-  return (
-    <div
-      className="right-side"
-      ref={props.containerRef}
-      onClick={props.onClick}
-    >
-      <div className="inner-container">
-        <div className="text">{props.current}</div>
-      </div>
-    </div>
-  );
-};
 
 export default App;

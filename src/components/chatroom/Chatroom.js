@@ -17,7 +17,8 @@ function Chatroom({ user }) {
     dispatch({
       type: "ADD_MESSAGE",
       item: {
-        name: recvMsg.name,
+        from_name: recvMsg.from_name,
+        to_name: recvMsg.to_name,
         message: recvMsg.message,
       },
     });
@@ -41,20 +42,23 @@ function Chatroom({ user }) {
     dispatch({
       type: "ADD_MESSAGE",
       item: {
-        to: room.id,
+        to_id: room.id,
+        to_name:room.name,
         message: message,
-        name: "piyush",
+        from_id:user._id,
+        from_name: user.name,
       },
     });
 
     e.preventDefault();
     console.log("sending message");
-    /*socket.emit("send-message", {
-      from: user._id,
+    socket.emit("send-message", {
+      from_id: user._id,
+      from_name:user.name,
       msg: message,
-      to: room.id,
-      name: user.name,
-    });*/
+      to_id: room.id,
+      to_name: room.name,
+    });
   };
 
   const findFriend = ()=>{

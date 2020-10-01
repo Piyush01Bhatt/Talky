@@ -61,17 +61,6 @@ function Sidebar({ user, findFriend }) {
                         roomName={"Pawan"}
                         roomId={"5f6b42673ffbaf4af3827907"}
                     />}
-                    <SidebarChat roomName={"Piyush"}/>
-                    <SidebarChat roomName={"Piyush"}/>
-                    <SidebarChat roomName={"Piyush"}/>
-                    <SidebarChat roomName={"Piyush"}/>
-                    <SidebarChat roomName={"Piyush"}/>
-                    <SidebarChat roomName={"Piyush"}/>
-                    <SidebarChat roomName={"Piyush"}/>
-                    <SidebarChat roomName={"Piyush"}/>
-                    <SidebarChat roomName={"Piyush"}/>
-                    <SidebarChat roomName={"Piyush"}/>
-                    <SidebarChat roomName={"Piyush"}/>
                 </div>
             </div>
         </div>

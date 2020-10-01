@@ -1,25 +1,13 @@
 export const initialState = {
-  user: {name:"piyush"},
+  user: {
+    name:"",
+    id:""
+  },
   room: {
     name:'',
     id:''
   },
-  messages:[
-    {name:"meethi",message:"hello"},
-    {name:"meethi",message:"hello"},
-    {name:"piyush",message:"yo bro"},
-    {name:"meethi",message:"hello"},
-    {name:"meethi",message:"hello"},
-    {name:"piyush",message:"hiiiii"},
-    {name:"meethi",message:"hello"},
-    {name:"piyush",message:"yoyo...adfkal;dfka;lfjajflakjflkajfalkdfj"},
-    {name:"meethi",message:"hello"},
-    {name:"meethi",message:"hello"},
-    {name:"meethi",message:"hello"},
-    {name:"meethi",message:"hello"},
-    {name:"meethi",message:"hello"},
-    {name:"meethi",message:"hello"},
-  ],
+  messages:[],
 };
 
 export const reducer = (state, action) => {

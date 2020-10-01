@@ -1,5 +1,4 @@
 import React from 'react';
-import loginImg from '../../login.svg'
 import './style.scss'
 import talkyLogo from '../../talky_logo.png'
 
