@@ -1,5 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -14,6 +12,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ![alt text](https://github.com/Piyush01Bhatt/Talky/blob/master/screenshots/screenshot_login.png?raw=true)
 ### Register
 ![alt text](https://github.com/Piyush01Bhatt/Talky/blob/master/screenshots/screenshot_register.png?raw=true)
+### Chatroom
+![alt text](https://github.com/Piyush01Bhatt/Talky/blob/master/screenshots/screenshot_chatroom.png?raw=true)
+
 
 
 
