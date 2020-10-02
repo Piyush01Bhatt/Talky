@@ -1,0 +1,113 @@
+.Overlay {
+  z-index: 100;
+  width: inherit !important;
+  height: inherit !important;
+  background-color: rgba(255, 255, 255, 0.75) !important;
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.Modal {
+  width: 100% !important;
+  height: fit-content !important;
+  background-color: #a898fa;
+  /*background-color: #5b66df;*/
+  display: flex;
+  display: flex;
+  justify-self: center;
+  border-radius: 3px;
+}
+
+.modal__body {
+  display: flex !important;
+  width: inherit !important;
+  height: inherit !important;
+  flex-direction: column !important;
+  justify-items: center !important;
+  /*box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75);*/
+}
+.close__button{
+    margin-top: 10px;
+}
+.icon_button{
+  color: #3f3d56 !important;
+  /*color:#454fbe !important;*/
+}
+
+.icon_button:hover{
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75);
+  }
+
+.modal__input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.modal__input > input {
+  height: 37px;
+  width: 100% !important;
+  border: 1px solid #e7e7e7 !important;
+  margin-left: 40px !important;
+  margin-right: 40px !important;
+  font-size: 16px;
+  border-radius: 3px;
+  padding: 10px !important;
+  color:black;
+  font-family: 'Open Sans', sans-serif;
+  background-color: white !important;
+}
+
+.modal__input > input:focus {
+  outline: none;
+}
+
+.modal__input > input:hover {
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75);
+  }
+
+.modal__footer {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.send_button {
+  border-radius: 3px;
+}
+
+.otp_verify {
+  font-weight: bold;
+  padding: 10px !important;
+  text-transform: none !important;
+  border: 0;
+  height: 45px !important;
+  width:60px !important;
+  background-color: #3f3d56 !important;
+  color: #fff !important;
+  font-weight: bold !important;
+}
+
+.otp_verify:hover{
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75) !important;
+}
+
+.send_button:focus {
+  outline: none;
+}
+
+.otp__resend {
+  margin-left: 20px;
+}
+
+.resend__button:hover{
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75) !important;
+}
+
+.resend__icon{
+    font-weight: bold !important;
+    color: #3f3d56 !important;
+}

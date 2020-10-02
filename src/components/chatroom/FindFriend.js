@@ -6,23 +6,44 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import { IconButton } from "@material-ui/core";
 import FriendsSearchList from "./FriendsSearchList"
 import axios from "../../helpers/axios"
+import { useStateValue } from "../../StateProvider";
 
 function FindFriend({ isOpen, close, element }) {
-  //const [people,setPeople] = useState([])
+  const [people, setPeople] = useState([])
+  const [searchText, setSearchText] = useState('')
+  const [{ user }, dispatch] = useStateValue();
 
 
-  /*useEffect(async () => {
-    try{
-      let res = await axios.get("/user/get_users")
-      if(res){
-        console.log(res.data)
-      }
-    }catch(err){
-      console.log(err.message)
+  const search = async (e) => {
+    e.preventDefault();
+    let lastPeople = people;
+    lastPeople = []
+    let lastId = "fake"
+    console.log(people.length)
+    if (lastPeople.length > 0) {
+      lastId = lastPeople[lastPeople.length - 1]._id;
     }
-    
-  }, [])
-*/
+    try {
+      const query = {
+        queryName: searchText,
+        last_id: lastId,
+        u_id: user._id,
+        num: 10
+      };
+      console.log(query)
+      const res = await axios.post("/user/get_users",query )
+      if (!res) {
+        throw new Error('empty response')
+      }
+      setPeople(res.data.body.data)
+    } catch (e) {
+      console.log(e.message)
+      setPeople([])
+    } finally {
+      setSearchText('')
+    }
+  }
+
   return (
     <div className="main">
       <Modal
@@ -34,23 +55,30 @@ function FindFriend({ isOpen, close, element }) {
         <div className="modal__body">
           <div className="modal__search">
             <div className="modal__searchContainer">
-              <SearchOutlined />
-              <input placeholder="Search for new friends" type="text" />
-            </div>
-            <IconButton onClick={() => close()}>
-                <CancelIcon />
+              <IconButton onClick={(e) => search(e)}>
+                <SearchOutlined />
               </IconButton>
+              <input placeholder="Search for new friends" type="text"
+                onChange={(e) => setSearchText(e.target.value)}
+                value={searchText} />
+            </div>
+            <IconButton onClick={() => {
+              close();
+              setPeople([])
+            }}>
+              <CancelIcon />
+            </IconButton>
           </div>
 
           <div className="modal__friends">
-              <FriendsSearchList
-                name={"Piyush"}
-                status={"In my own lane, on my own frequency"}
-              />
-              <FriendsSearchList
-                name={'Pawan'}
-                status={'This world is beautiful'}
-              />
+            {
+              (people.length > 0) && people.map((item, i) => (
+                <FriendsSearchList
+                  name={item.name}
+                  status={item.status}
+                />
+              ))
+            }
           </div>
         </div>
       </Modal>

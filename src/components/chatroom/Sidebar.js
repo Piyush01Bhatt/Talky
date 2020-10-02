@@ -11,14 +11,15 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 
 function Sidebar({ user, findFriend }) {
 
-    const [state, dispatch] = useStateValue();
+    const [{ recent_rooms }, dispatch] = useStateValue();
 
-    const processRoomClick = (roomName, roomId) => {
+    const processRoomClick = (roomName, roomId, key) => {
         dispatch({
             type: 'SET_ROOM',
             item: {
                 name: roomName,
-                id: roomId
+                id: roomId,
+                key:key,
             }
         })
     }
@@ -35,10 +36,10 @@ function Sidebar({ user, findFriend }) {
                         <DonutLargeIcon />
                     </IconButton>
                     <IconButton className="inactive_button" disabled={true}>
-                        <ChatIcon/>
+                        <ChatIcon />
                     </IconButton>
                     <IconButton onClick={(e) => findFriend()} className="action_button">
-                        <PeopleAltIcon/>
+                        <PeopleAltIcon />
                     </IconButton>
                 </div>
             </div>
@@ -51,16 +52,16 @@ function Sidebar({ user, findFriend }) {
                 </div>
 
                 <div className="sidebar__chats">
-                    {(user.name === 'Pawan') && <SidebarChat
-                        onClick={() => (processRoomClick("Piyush", "5f64f240d5328d29e1c4e8ff"))}
-                        roomName={"Piyush"}
-                        roomId={"5f64f240d5328d29e1c4e8ff"}
-                    />}
-                    {(user.name === 'Piyush') && <SidebarChat
-                        onClick={() => (processRoomClick("Pawan", "5f6b42673ffbaf4af3827907"))}
-                        roomName={"Pawan"}
-                        roomId={"5f6b42673ffbaf4af3827907"}
-                    />}
+                    {(recent_rooms) && recent_rooms.map((item, index) => (
+                        <SidebarChat
+                            onClick={processRoomClick}
+                            roomName={item.name}
+                            index={index}
+                            key={index}
+                            roomId={item.id}
+                        />
+                    ))
+                    }
                 </div>
             </div>
         </div>

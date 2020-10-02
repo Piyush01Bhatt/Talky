@@ -54,7 +54,7 @@ function Chat({ sendMessage }) {
             />
             :
             <ChatReceiver
-              name={item.to_name}
+              name={item.from_name}
               messageBody={item.message}
               timestamp={Date.now()}
             />

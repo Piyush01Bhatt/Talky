@@ -7,6 +7,15 @@
     align-items: center;
 }
 
+.sidebarChat_selected{
+    /*background-color:#ebebeb*/
+    border-left: 3px solid red;
+    /*background-color: #f8dadc;*/
+    background-image: linear-gradient(to right,#f8d9db,#f9f9fc);
+    /*background-color: white;*/
+    margin-right: 0px;
+}
+
 .sidebarChat:hover {
     /*background-color:#ebebeb*/
     border-left: 3px solid red;

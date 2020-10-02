@@ -11,17 +11,19 @@ import FindFriend from "./FindFriend"
 function Chatroom({ user }) {
   const [{ room, messages }, dispatch] = useStateValue();
   const socket = useSocket();
-  const [modalIsOpen,setModalIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const processReceivedMessage = (recvMsg) => {
-    dispatch({
-      type: "ADD_MESSAGE",
-      item: {
-        from_name: recvMsg.from_name,
-        to_name: recvMsg.to_name,
-        message: recvMsg.message,
-      },
-    });
+    if (recvMsg.from_id === room.id) {
+      dispatch({
+        type: "ADD_MESSAGE",
+        item: {
+          from_name: recvMsg.from_name,
+          to_name: recvMsg.to_name,
+          message: recvMsg.message,
+        },
+      });
+    }
   };
 
   useEffect(() => {
@@ -43,9 +45,9 @@ function Chatroom({ user }) {
       type: "ADD_MESSAGE",
       item: {
         to_id: room.id,
-        to_name:room.name,
+        to_name: room.name,
         message: message,
-        from_id:user._id,
+        from_id: user._id,
         from_name: user.name,
       },
     });
@@ -54,18 +56,18 @@ function Chatroom({ user }) {
     console.log("sending message");
     socket.emit("send-message", {
       from_id: user._id,
-      from_name:user.name,
+      from_name: user.name,
       msg: message,
       to_id: room.id,
       to_name: room.name,
     });
   };
 
-  const findFriend = ()=>{
+  const findFriend = () => {
     setModalIsOpen(true)
   }
 
-  const closeFindFriend = ()=>{
+  const closeFindFriend = () => {
     setModalIsOpen(false)
   }
 
@@ -76,7 +78,7 @@ function Chatroom({ user }) {
         <Chat sendMessage={sendMessage} />
       </div>
       <FindFriend isOpen={modalIsOpen} close={closeFindFriend}
-      element={document.getElementById("talky")}/>
+        element={document.getElementById("talky")} />
     </div>
   );
 }

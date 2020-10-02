@@ -14,18 +14,23 @@
         justify-content: space-between;
     }
 
-    .topHeader > button{
+    .mui__button > button{
         margin-right: 130px;
         margin-bottom: 100px;
         margin-top: 20px;
         padding:8px;
         height: 40px;
         width: 6em;
+        text-transform: none !important;
         background-color: white;
         border:0.2px solid #e7e7e7;
         border-radius: 5px;
         color: #454fbe;
         font-weight: bold;
+      }
+
+      .mui__button > Button:hover{
+        box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75);
       }
 
       .topHeader > img{
@@ -85,8 +90,13 @@
                 
                 transition: all 250mx ease-in-out;
 
+                &:hover{
+                    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75);
+                }
+
                 &:focus {
                     outline: none;
+                    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75);
                     /*box-shadow: 0px 0px 12px 0.8px #3474dbb2;*/
                 }
             }
@@ -105,11 +115,12 @@
             height:47px;
             background-color: #454fbe;
             color: #fff;
+            text-transform: none !important;
             border-radius:3px;
             transition: all 250ms ease-in-out;
             cursor:pointer;
-            &:hover {
-                background-color: #9683fb;
+            &:hover{
+                box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75) 
             }
             &:focus {
                 outline:none;
