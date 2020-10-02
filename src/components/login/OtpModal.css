@@ -2,7 +2,7 @@
   z-index: 100;
   width: inherit !important;
   height: inherit !important;
-  background-color: rgba(255, 255, 255, 0.75) !important;
+  background-color: rgba(0, 0, 0, 0.75) !important;
   border-bottom-right-radius: 25px;
   border-top-right-radius: 25px;
 }
@@ -10,7 +10,7 @@
 .Modal {
   width: 100% !important;
   height: fit-content !important;
-  background-color: #a898fa;
+  background-color: #fff;
   /*background-color: #5b66df;*/
   display: flex;
   display: flex;
@@ -30,8 +30,8 @@
     margin-top: 10px;
 }
 .icon_button{
-  color: #3f3d56 !important;
-  /*color:#454fbe !important;*/
+  /*color: #3f3d56 !important;*/
+  color:#454FBE !important;
 }
 
 .icon_button:hover{
@@ -48,7 +48,7 @@
 .modal__input > input {
   height: 37px;
   width: 100% !important;
-  border: 1px solid #e7e7e7 !important;
+  border: 2px solid #e7e7e7 !important;
   margin-left: 40px !important;
   margin-right: 40px !important;
   font-size: 16px;
@@ -85,14 +85,14 @@
   text-transform: none !important;
   border: 0;
   height: 45px !important;
-  width:60px !important;
-  background-color: #3f3d56 !important;
+  width:160px !important;
+  background-color: #454FBE !important;
   color: #fff !important;
   font-weight: bold !important;
 }
 
 .otp_verify:hover{
-    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75) !important;
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0, 0.75) !important;
 }
 
 .send_button:focus {
@@ -109,5 +109,5 @@
 
 .resend__icon{
     font-weight: bold !important;
-    color: #3f3d56 !important;
+    color: #454FBE !important;
 }

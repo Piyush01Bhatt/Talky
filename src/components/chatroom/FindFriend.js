@@ -49,12 +49,12 @@ function FindFriend({ isOpen, close, element }) {
       <Modal
         isOpen={isOpen}
         appElement={element}
-        className="Modal"
+        className="Find_Friend_Modal"
         overlayClassName="Overlay"
       >
-        <div className="modal__body">
-          <div className="modal__search">
-            <div className="modal__searchContainer">
+        <div className="findFriendModal__body">
+          <div className="findFriendModal__search">
+            <div className="findFriendModal__searchContainer">
               <IconButton onClick={(e) => search(e)}>
                 <SearchOutlined />
               </IconButton>
@@ -70,7 +70,7 @@ function FindFriend({ isOpen, close, element }) {
             </IconButton>
           </div>
 
-          <div className="modal__friends">
+          <div className="findFriendModal__friends">
             {
               (people.length > 0) && people.map((item, i) => (
                 <FriendsSearchList

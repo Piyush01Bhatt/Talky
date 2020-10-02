@@ -10,7 +10,7 @@
   text-align: center;
 }
 
-.Modal{
+.Find_Friend_Modal{
     border: none !important;
     outline:none !important;
     display:flex;
@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-.modal__body{
+.findFriendModal__body{
     display: flex;
     width: 30vw;
     height:90%;
@@ -28,7 +28,7 @@
     box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75);
 }
 
-.modal__search {
+.findFriendModal__search {
     display: flex;
     align-items: center;
     background-color:#f6f6f6;
@@ -36,7 +36,7 @@
     padding:10px;
 }
 
-.modal__searchContainer{
+.findFriendModal__searchContainer{
     display: flex;
     align-items: center;
     background-color: white;
@@ -45,19 +45,19 @@
     border-radius:20px;
 }
 
-.modal__searchContainer > .MuiSvgIcon-root {
+.findFriendModal__searchContainer > .MuiSvgIcon-root {
     color:gray;
     padding:10px;
 }
 
-.modal__searchContainer > input {
+.findFriendModal__searchContainer > input {
     border:none;
     outline-width:0;
     margin-left:10px;
     flex:1;
 }
 
-.modal__friends{
+.findFriendModal__friends{
     flex: 1;
     background-color: white;
     overflow: scroll;
