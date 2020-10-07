@@ -9,6 +9,7 @@ import axios from "./helpers/axios";
 import { useStateValue } from "./StateProvider";
 import { SocketProvider } from "./components/chatroom/SocketProvider";
 import ReactCardFlip from 'react-card-flip';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -46,7 +47,8 @@ class App extends React.Component {
         email: this.state.loginEmail,
         password: this.state.loginPwd,
       });
-      const resUser = res.data.body.data;
+      const resUser = res.data.body;
+      console.log(resUser)
       if(! resUser._id){
         throw new Error('undefined id received')
       }

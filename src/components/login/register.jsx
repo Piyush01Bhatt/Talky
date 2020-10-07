@@ -1,8 +1,8 @@
 import { Button } from "@material-ui/core";
 import React , {useState} from "react";
-import loginImg from "../../login.svg";
 import talkyLogo from '../../talky_logo.png'
 import OtpModal from './OtpModal'
+import axios from '../../helpers/axios'
 
 export const Register = props => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -16,9 +16,18 @@ export const Register = props => {
     setModalIsOpen(false)
   }
 
-  const open  = ()=>{
-    console.log(userInput)
+  const open  = async ()=>{
+    try{
+      console.log(userInput)
+      let res = await axios.post('/user/register',{
+        name:userInput.name,
+        email:userInput.email,
+        password:userInput.password
+      })
     setModalIsOpen(true)
+    }catch(err){
+      console.log(err.message)
+    }
   }
 
   return (
@@ -47,7 +56,7 @@ export const Register = props => {
             />
           </div>
           <div className="form-group">
-            <input type="text" name="password" placeholder="password" 
+            <input type="password" name="password" placeholder="password" 
             value={userInput.password}
             onChange={(e)=>setUserInput({...userInput,password:e.target.value})}
             />
@@ -60,7 +69,8 @@ export const Register = props => {
           </Button>
       </div>
       <OtpModal isOpen={modalIsOpen} close={close} 
-      element={document.getElementById("talky")}/>
+      element={document.getElementById("talky")}
+      userEmail={userInput.email}/>
     </div>
   );
 }

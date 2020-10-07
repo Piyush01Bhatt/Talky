@@ -4,37 +4,58 @@ import "./OtpModal.css"
 import CancelIcon from "@material-ui/icons/Cancel";
 import { Button, IconButton } from "@material-ui/core";
 import AutorenewIcon from '@material-ui/icons/Autorenew';
+import axios from '../../helpers/axios'
 
-function OtpModal({ isOpen, close, element }) {
+function OtpModal({ isOpen, close, element, userEmail }) {
     const [input, setInput] = useState('');
+
+    const verify_otp = async () => {
+        try {
+            let res = await axios.post('/user/auth', {
+                email: userEmail,
+                otp: input
+            })
+            if (res && res.data.body.success === true) {
+                alert("Otp Verified")
+                setInput('')
+                close()
+            }
+        } catch (err) {
+            console.log(err)
+            alert(err.message)
+        }
+    }
+
     return (
         <Modal
             isOpen={isOpen}
-            className={"Modal"}
-            overlayClassName={"Overlay"}
+            className="Otp__Modal"
+            overlayClassName="Overlay"
             appElement={element}
             parentSelector={() => document.querySelector("#register_base")}
         >
-            <div className="modal__body">
-                <div className="close__button">
-                    <IconButton className="icon_button" onClick={() => {
+            <div className="otpmodal__body">
+                <div className="otpclose__button">
+                    <IconButton className="otpicon_button" onClick={() => {
                         close();
                     }}>
                         <CancelIcon />
                     </IconButton>
                 </div>
 
-                <div className="modal__input">
-                    <input type="text" name="otp" placeholder="otp" />
+                <div className="otpmodal__input">
+                    <input value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        type="text" name="otp" placeholder="otp" />
                 </div>
 
-                <div className="modal__footer">
-                    <div className="send__button">
-                        <Button className="otp_verify">Verify</Button>
+                <div className="otpmodal__footer">
+                    <div className="otpsend__button">
+                        <Button onClick={() => verify_otp()} className="otp_verify">Verify</Button>
                     </div>
                     <div className="otp__resend">
-                        <IconButton className="resend__button">
-                            <AutorenewIcon className="resend__icon"/>
+                        <IconButton className="otpresend__button">
+                            <AutorenewIcon className="otpresend__icon" />
                         </IconButton>
                     </div>
                 </div>

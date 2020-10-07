@@ -1,24 +1,26 @@
 .Overlay {
-  z-index: 100;
+  z-index: 100 !important;
   width: inherit !important;
   height: inherit !important;
-  background-color: rgba(0, 0, 0, 0.75) !important;
+  background-color: rgba(0, 0, 0, 0.55) !important;
   border-bottom-right-radius: 25px;
   border-top-right-radius: 25px;
 }
 
-.Modal {
+.Otp__Modal {
   width: 100% !important;
   height: fit-content !important;
-  background-color: #fff;
+  background-color: #fff !important;
+  border: none !important;
   /*background-color: #5b66df;*/
   display: flex;
   display: flex;
   justify-self: center;
   border-radius: 3px;
+  outline:none !important;
 }
 
-.modal__body {
+.otpmodal__body {
   display: flex !important;
   width: inherit !important;
   height: inherit !important;
@@ -26,26 +28,26 @@
   justify-items: center !important;
   /*box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75);*/
 }
-.close__button{
+.otpclose__button{
     margin-top: 10px;
 }
-.icon_button{
+.otpicon_button{
   /*color: #3f3d56 !important;*/
   color:#454FBE !important;
 }
 
-.icon_button:hover{
+.otpicon_button:hover{
     box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75);
   }
 
-.modal__input {
+.otpmodal__input {
   display: flex;
   align-items: center;
   width: 100%;
   margin-top: 20px;
 }
 
-.modal__input > input {
+.otpmodal__input > input {
   height: 37px;
   width: 100% !important;
   border: 2px solid #e7e7e7 !important;
@@ -59,15 +61,15 @@
   background-color: white !important;
 }
 
-.modal__input > input:focus {
+.otpmodal__input > input:focus {
   outline: none;
 }
 
-.modal__input > input:hover {
+.otpmodal__input > input:hover {
     box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75);
   }
 
-.modal__footer {
+.otpmodal__footer {
   display: flex;
   margin-top: 30px;
   margin-bottom: 20px;
@@ -75,7 +77,7 @@
   justify-content: center;
 }
 
-.send_button {
+.otpsend_button {
   border-radius: 3px;
 }
 
@@ -103,11 +105,11 @@
   margin-left: 20px;
 }
 
-.resend__button:hover{
+.otpresend__button:hover{
     box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75) !important;
 }
 
-.resend__icon{
+.otpresend__icon{
     font-weight: bold !important;
     color: #454FBE !important;
 }
