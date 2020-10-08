@@ -27,20 +27,6 @@ class App extends React.Component {
   componentDidMount() {
   }
 
-  changeState() {
-    console.log("Change State");
-    const { isLoginActive } = this.state;
-
-    if (isLoginActive) {
-      this.rightSide.classList.remove("right");
-      this.rightSide.classList.add("left");
-    } else {
-      this.rightSide.classList.remove("left");
-      this.rightSide.classList.add("right");
-    }
-    this.setState((prevState) => ({ isLoginActive: !prevState.isLoginActive }));
-  }
-
   processLogin = async () => {
     try {
       let res = await axios.post("/user/login", {
