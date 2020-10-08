@@ -19,11 +19,11 @@ export const Register = props => {
   const open = async () => {
     try {
       console.log(userInput)
-      const res = await axios.post('/user/register', {
+      /*const res = await axios.post('/user/register', {
         name: userInput.name,
         email: userInput.email,
         password: userInput.password
-      })
+      })*/
       setModalIsOpen(true)
     } catch (err) {
       console.log(err.message)

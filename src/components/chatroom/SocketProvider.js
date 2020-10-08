@@ -18,7 +18,10 @@ export function SocketProvider({id, user, children}) {
             { query: { id } }
         );
         setSocket(newSocket)
-
+        newSocket.on("received-friend-request", (requestInfo) => {
+            console.log('request-received')
+            console.log(requestInfo)
+          })
         dispatch({
             type:'SET_USER',
             item:user

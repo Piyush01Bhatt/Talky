@@ -13,7 +13,6 @@ function FindFriend({ isOpen, close, element }) {
   const [searchText, setSearchText] = useState('')
   const [{ user }, dispatch] = useStateValue();
 
-
   const search = async (e) => {
     e.preventDefault();
     let lastPeople = people;
@@ -76,6 +75,9 @@ function FindFriend({ isOpen, close, element }) {
                 <FriendsSearchList
                   name={item.name}
                   status={item.status}
+                  index={i}
+                  personId={item._id}
+                  user={user}
                 />
               ))
             }

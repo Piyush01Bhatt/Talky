@@ -3,8 +3,8 @@
   width: inherit !important;
   height: inherit !important;
   background-color: rgba(0, 0, 0, 0.55) !important;
-  border-bottom-right-radius: 25px;
-  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px !important;
+  border-top-right-radius: 25px !important;
 }
 
 .Otp__Modal {

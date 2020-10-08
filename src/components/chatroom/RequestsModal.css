@@ -1,0 +1,5 @@
+.drawer__menu{
+    width: 22vw;
+    display: flex;
+    flex-direction: column;
+}

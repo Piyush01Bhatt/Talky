@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar";
 import axios from "../../helpers/axios";
 import { useSocket } from "./SocketProvider";
 import FindFriend from "./FindFriend"
+import RequestsModal from './RequestsModal'
 
 function Chatroom({ user }) {
   const [{ room, messages }, dispatch] = useStateValue();
@@ -36,6 +37,7 @@ function Chatroom({ user }) {
     return () => {
       if (socket) {
         socket.off("received-message");
+        socket.off("received-friend-request")
       }
     };
   }, [room, messages]);
@@ -73,7 +75,7 @@ function Chatroom({ user }) {
 
   return (
     <div className="chatroom__main" id="chatroom">
-      <div className="chatroom__body">
+      <div className="chatroom__body" id="chatroomBody">
         <Sidebar user={user} findFriend={findFriend} />
         <Chat sendMessage={sendMessage} />
       </div>

@@ -1,6 +1,7 @@
 
 .chatroom__body {
   display: flex;
+  position: relative;
   border-radius: 30px ;
   background-color: white;
   margin-top: -0px;

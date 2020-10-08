@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Sidebar.css";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge"
 import ChatIcon from "@material-ui/icons/Chat"
@@ -8,10 +8,12 @@ import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import SidebarChat from "./SidebarChat"
 import { useStateValue } from '../../StateProvider'
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import RequestsModal from './RequestsModal'
 
 function Sidebar({ user, findFriend }) {
 
     const [{ recent_rooms }, dispatch] = useStateValue();
+    const [modalIsOpen, setModalIsOpen] = useState(false)
 
     const processRoomClick = (roomName, roomId, key) => {
         dispatch({
@@ -19,13 +21,17 @@ function Sidebar({ user, findFriend }) {
             item: {
                 name: roomName,
                 id: roomId,
-                key:key,
+                key: key,
             }
         })
     }
 
+    const closeRequests = ()=>{
+        setModalIsOpen(false)
+    }
+
     return (
-        <div className='sidebar'>
+        <div className='sidebar' id="chatroom_sidebar">
             <div className="sidebar__header">
                 <div className="avatar__container">
                     <Avatar className="avatar__icon" />
@@ -35,7 +41,7 @@ function Sidebar({ user, findFriend }) {
                     <IconButton className="inactive_button" disabled={true}>
                         <DonutLargeIcon />
                     </IconButton>
-                    <IconButton className="inactive_button" disabled={true}>
+                    <IconButton className="action_button" onClick={(e)=>setModalIsOpen(true)}>
                         <ChatIcon />
                     </IconButton>
                     <IconButton onClick={(e) => findFriend()} className="action_button">
@@ -64,6 +70,11 @@ function Sidebar({ user, findFriend }) {
                     }
                 </div>
             </div>
+            <RequestsModal 
+                isOpen={modalIsOpen} 
+                closeRequests={closeRequests}
+                element={document.getElementById('talky')}
+            />
         </div>
     )
 }
