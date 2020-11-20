@@ -9,13 +9,8 @@ export const initialState = {
     key:-1
   },
   messages: [],
-  recent_rooms: [{
-    name: "Piyush",
-    id: "5f64f240d5328d29e1c4e8ff",
-  }, {
-    name: "Pawan",
-    id: "5f6b42673ffbaf4af3827907",
-  }]
+  recent_rooms: [], // {name,id}
+  requests: [] //{name,id,status}
 };
 
 export const reducer = (state, action) => {
@@ -43,6 +38,24 @@ export const reducer = (state, action) => {
       return {
         ...state,
         messages: [...state.messages, action.item]
+      };
+
+    case "ADD_REQUEST":
+      return {
+        ...state,
+        requests: [...state.requests, action.item]
+      };
+    
+    case "ADD_REQUESTS":
+      return {
+        ...state,
+        requests: [...action.item]
+      }
+
+    case "RESET_REQUESTS":
+      return {
+        ...state,
+        requests: [...action.item]
       }
 
     default:

@@ -1,6 +1,6 @@
 .sidebar{
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px !important;
+    border-bottom-left-radius: 25px !important;
     display:flex;
     flex-direction: row;
     flex:0.25;

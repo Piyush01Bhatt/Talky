@@ -27,13 +27,13 @@ class App extends React.Component {
   componentDidMount() {
   }
 
-  processLogin = async () => {
+  processLogin = async (setLoading) => {
     try {
       let res = await axios.post("/user/login", {
         email: this.state.loginEmail,
         password: this.state.loginPwd,
       });
-      const resUser = res.data.body;
+      const resUser = res.data;
       console.log(resUser)
       if(! resUser._id){
         throw new Error('undefined id received')
@@ -48,6 +48,8 @@ class App extends React.Component {
     } catch (e) {
       console.log(e.message);
       alert("login failed");
+    } finally {
+      setLoading(false) // setLoading hook from login component
     }
   };
 

@@ -105,16 +105,14 @@
 
     .footer {
         margin-top:2em;
+        position: relative;
 
-        .btn {
-            
+        .btn {            
             font-weight: bold;
             padding: 5px 20px;
             border: 0;
             min-width: 25.5em;
-            height:47px;
-            background-color: #454fbe;
-            color: #fff;
+            height:47px;         
             text-transform: none !important;
             border-radius:3px;
             transition: all 250ms ease-in-out;

@@ -29,6 +29,14 @@
 }
 
 .request__icon{
-    color:greenyellow;
+    color:rgb(20, 87, 43);
     font-size: 28px !important;
+}
+
+.fab {
+    position: relative;
+}
+
+.send__request:hover {
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75) 
 }

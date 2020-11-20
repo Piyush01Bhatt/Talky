@@ -1,5 +1,5 @@
 import { SearchOutlined } from "@material-ui/icons";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import Modal from "react-modal";
 import "./FindFriend.css";
 import CancelIcon from "@material-ui/icons/Cancel";
@@ -7,36 +7,45 @@ import { IconButton } from "@material-ui/core";
 import FriendsSearchList from "./FriendsSearchList"
 import axios from "../../helpers/axios"
 import { useStateValue } from "../../StateProvider";
+import { makeStyles } from '@material-ui/core/styles'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import { green } from '@material-ui/core/colors';
+
+const useStyles = makeStyles((theme)=> ({
+  buttonProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -18,
+    marginLeft: -18,
+  }
+}))
 
 function FindFriend({ isOpen, close, element }) {
   const [people, setPeople] = useState([])
   const [searchText, setSearchText] = useState('')
+  const [loading, setLoading] = useState(false)
   const [{ user }, dispatch] = useStateValue();
+
+  const classes = useStyles()
 
   const search = async (e) => {
     e.preventDefault();
-    let lastPeople = people;
-    lastPeople = []
-    let lastId = "fake"
-    console.log(people.length)
-    if (lastPeople.length > 0) {
-      lastId = lastPeople[lastPeople.length - 1]._id;
-    }
+    setLoading(true)
     try {
-      const query = {
-        queryName: searchText,
-        last_id: lastId,
-        u_id: user._id,
-        num: 10
-      };
-      console.log(query)
-      const res = await axios.post("/user/get_users",query )
+      const queryUrl = `/user/get_users/${user._id}/${searchText}/${1}/${10}`
+      const res = await axios.get(queryUrl)
       if (!res) {
         throw new Error('empty response')
       }
-      setPeople(res.data.body.data)
+      console.log(res.data.data)
+      setLoading(false)
+      setPeople(res.data.data)
     } catch (e) {
       console.log(e.message)
+      setLoading(false)
+      alert('No person with such name')
       setPeople([])
     } finally {
       setSearchText('')
@@ -76,11 +85,15 @@ function FindFriend({ isOpen, close, element }) {
                   name={item.name}
                   status={item.status}
                   index={i}
+                  received={item.received}
+                  requested={item.requested}
+                  accepted={item.accepted}
                   personId={item._id}
                   user={user}
                 />
               ))
             }
+            {loading && <CircularProgress size={38} className={classes.buttonProgress}/>}
           </div>
         </div>
       </Modal>
