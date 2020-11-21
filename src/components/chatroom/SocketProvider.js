@@ -25,9 +25,9 @@ export function SocketProvider({id, user, children}) {
             dispatch({
                 type:'ADD_REQUEST',
                 item:{
-                    name:requestInfo.from,
-                    id:requestInfo.id,
-                    status:requestInfo.status
+                    sentUserName:requestInfo.from,
+                    fo_id:requestInfo.id,
+                    sentUserStatus:requestInfo.status
                 }
             })
           })
@@ -41,11 +41,7 @@ export function SocketProvider({id, user, children}) {
                  .then((res)=>{
                     dispatch({
                         type:'ADD_REQUESTS',
-                        item:{
-                            name:res.data.data.from,
-                            id:requestInfo.id,
-                            status:requestInfo.status
-                        }
+                        item:res.data.data
                     })
                  })
         } catch (err) {

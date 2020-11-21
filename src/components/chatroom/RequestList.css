@@ -38,3 +38,11 @@
     color:green !important;
     font-size: 28px !important;
 }
+
+.accept__fab {
+    position: relative;
+}
+
+.reject__fab {
+    position: relative;
+}

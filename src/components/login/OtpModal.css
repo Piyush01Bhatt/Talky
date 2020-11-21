@@ -77,8 +77,9 @@
   justify-content: center;
 }
 
-.otpsend_button {
+.otpsend__button {
   border-radius: 3px;
+  position: relative !important;
 }
 
 .otp_verify {

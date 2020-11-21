@@ -64,9 +64,9 @@ export const Login = props => {
           }
           disabled={loading}
           onClick={(e)=>{
-          setLoading(true)
-          props.processLogin(setLoading)
-        }}>
+            setLoading(true)
+            props.processLogin(setLoading)
+          }}>
           Login
         </Button>
         {loading && <CircularProgress size={24} className={classes.buttonProgress}/>}

@@ -12,7 +12,8 @@ function RequestsModal({ isOpen, closeRequests, element }) {
   const [input, setInput] = useState('')
   const [{ requests, user }, dispatch] = useStateValue();
 
-  const acceptRequest = async (index, personId, name, status) => {
+  const acceptRequest = async (index, personId, name, status, setLoading) => {
+    setLoading(true)
     try {
       const res = await axios.post('/friends/accept_request', {
         userId: user._id,
@@ -37,6 +38,8 @@ function RequestsModal({ isOpen, closeRequests, element }) {
       })
     } catch (err) {
       console.log(err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -67,9 +70,9 @@ function RequestsModal({ isOpen, closeRequests, element }) {
           {
             (requests.length > 0) ? requests.map((item, i) => {
               return <RequestList
-                name={item.name}
-                status={item.status}
-                personId={item.id}
+                name={item.sentUserName}
+                status={item.sentUserStatus}
+                personId={item.fo_id}
                 user={user}
                 index={i}
                 acceptRequest={acceptRequest}

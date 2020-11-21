@@ -1,12 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./RequestList.css"
 import { Avatar, IconButton } from '@material-ui/core'
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import CloseIcon from '@material-ui/icons/Close';
 import axios from "../../helpers/axios"
 import CheckIcon from '@material-ui/icons/Check';
+import { green } from '@material-ui/core/colors';
+import { makeStyles } from '@material-ui/core/styles'
+import CircularProgress from '@material-ui/core/CircularProgress'
+
+
+const useStyles = makeStyles((theme)=> ({
+    buttonProgress: {
+      color: green[500],
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      marginTop: -18,
+      marginLeft: -18,
+    }
+  }))
 
 function RequestList({ name, status, personId, index, user, acceptRequest, rejectRequest }) {
+    const classes = useStyles();
+    const [loadingAccept, setLoadingAccept] = useState(false)
+    const [loadingReject, setLoadingReject] = useState(false)
 
     return (
         <div className="list__main">
@@ -15,12 +33,18 @@ function RequestList({ name, status, personId, index, user, acceptRequest, rejec
                 <h2>{name}</h2>
                 <p>{status}</p>
             </div>
-            <IconButton onClick={(e)=>acceptRequest(index,personId,name,status)}>
-                <CheckIcon className="accept__icon" />
-            </IconButton>
-            <IconButton onClick={()=>rejectRequest(index,personId,name,status)}>
-                <CloseIcon className="reject__icon" />
-            </IconButton>
+            <div className="accept__fab">
+                <IconButton onClick={(e)=>acceptRequest(index,personId,name,status,setLoadingAccept)}>
+                    <CheckIcon className="accept__icon" />
+                </IconButton>
+                {loadingAccept && <CircularProgress size={38} className={classes.buttonProgress}/>}
+            </div>
+            <div className="reject__fab">
+                <IconButton onClick={()=>rejectRequest(index,personId,name,status,setLoadingReject)}>
+                    <CloseIcon className="reject__icon" />
+                </IconButton>
+                {loadingReject && <CircularProgress size={38} className={classes.buttonProgress}/>}
+            </div>
         </div>
     )
 }

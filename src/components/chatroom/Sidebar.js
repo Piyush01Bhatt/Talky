@@ -1,19 +1,30 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import "./Sidebar.css";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge"
 import ChatIcon from "@material-ui/icons/Chat"
 import MoreVertIcon from "@material-ui/icons/MoreVert"
-import { IconButton, Avatar } from '@material-ui/core';
+import { IconButton, Avatar, makeStyles } from '@material-ui/core';
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import SidebarChat from "./SidebarChat"
 import { useStateValue } from '../../StateProvider'
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import RequestsModal from './RequestsModal'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+
+const useStyles = makeStyles((theme) => ({
+    fab: {
+      position: 'absolute',
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+    }
+  }));
 
 function Sidebar({ user, findFriend }) {
 
     const [{ recent_rooms }, dispatch] = useStateValue();
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const classes = useStyles();
 
     const processRoomClick = (roomName, roomId, key) => {
         dispatch({
@@ -26,7 +37,7 @@ function Sidebar({ user, findFriend }) {
         })
     }
 
-    const closeRequests = ()=>{
+    const closeRequests = () => {
         setModalIsOpen(false)
     }
 
@@ -41,7 +52,7 @@ function Sidebar({ user, findFriend }) {
                     <IconButton className="inactive_button" disabled={true}>
                         <DonutLargeIcon />
                     </IconButton>
-                    <IconButton className="action_button" onClick={(e)=>setModalIsOpen(true)}>
+                    <IconButton className="action_button" onClick={(e) => setModalIsOpen(true)}>
                         <ChatIcon />
                     </IconButton>
                     <IconButton onClick={(e) => findFriend()} className="action_button">
@@ -69,9 +80,12 @@ function Sidebar({ user, findFriend }) {
                     ))
                     }
                 </div>
+                <Fab color="primary" aria-label="add" className={classes.fab}>
+                    <AddIcon />
+                </Fab>
             </div>
-            <RequestsModal 
-                isOpen={modalIsOpen} 
+            <RequestsModal
+                isOpen={modalIsOpen}
                 closeRequests={closeRequests}
                 element={document.getElementById('talky')}
             />

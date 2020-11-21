@@ -2,20 +2,36 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 import './OtpModal.css'
 import CancelIcon from '@material-ui/icons/Cancel'
-import { Button, IconButton } from '@material-ui/core'
+import { Button, IconButton, CircularProgress } from '@material-ui/core'
 import AutorenewIcon from '@material-ui/icons/Autorenew'
 import axios from '../../helpers/axios'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme)=> ({
+  buttonProgress: {
+    color: '#454fbe',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  }
+}))
 
 function OtpModal ({ isOpen, close, element, userEmail }) {
+  const classes = useStyles()
   const [input, setInput] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const verify_otp = async () => {
+    setLoading(true)
     try {
       const res = await axios.post('/user/auth', {
         email: userEmail,
         otp: input
       })
-      if (res && res.data.body.success === true) {
+      if (res && res.data.success === true) {
+        setLoading(false)
         alert('Otp Verified')
         setInput('')
         close()
@@ -23,6 +39,8 @@ function OtpModal ({ isOpen, close, element, userEmail }) {
     } catch (err) {
       console.log(err)
       alert(err.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -51,7 +69,20 @@ function OtpModal ({ isOpen, close, element, userEmail }) {
 
         <div className="otpmodal__footer">
           <div className="otpsend__button">
-            <Button onClick={() => verify_otp()} className="otp_verify">Verify</Button>
+            <Button onClick={() => verify_otp()} 
+              className="otp_verify"
+              style={
+                loading ? {backgroundColor:'#e0e0e0',
+                           color: '#9e9e9e'
+                          }:
+                          {backgroundColor: '#454fbe',
+                            color: '#fff'
+                          }
+              }
+              disabled={loading}>
+                Verify
+            </Button>
+            {loading && <CircularProgress size={24} className={classes.buttonProgress}/>}
           </div>
           <div className="otp__resend">
             <IconButton className="otpresend__button">
@@ -59,10 +90,8 @@ function OtpModal ({ isOpen, close, element, userEmail }) {
             </IconButton>
           </div>
         </div>
-
       </div>
     </Modal>
-
   )
 }
 
