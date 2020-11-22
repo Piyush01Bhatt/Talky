@@ -11,6 +11,7 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import RequestsModal from './RequestsModal'
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import MyFriendsModal from './MyFriendsModal';
 
 const useStyles = makeStyles((theme) => ({
     fab: {
@@ -24,6 +25,7 @@ function Sidebar({ user, findFriend }) {
 
     const [{ recent_rooms }, dispatch] = useStateValue();
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [friendsModelIsOpen, setFriendsModelIsOpen] = useState(false)
     const classes = useStyles();
 
     const processRoomClick = (roomName, roomId, key) => {
@@ -39,6 +41,10 @@ function Sidebar({ user, findFriend }) {
 
     const closeRequests = () => {
         setModalIsOpen(false)
+    }
+
+    const handleClose = () => {
+        setFriendsModelIsOpen(false)
     }
 
     return (
@@ -80,7 +86,9 @@ function Sidebar({ user, findFriend }) {
                     ))
                     }
                 </div>
-                <Fab color="primary" aria-label="add" className={classes.fab}>
+                <Fab color="primary" aria-label="add" 
+                className={classes.fab}
+                onClick={()=>setFriendsModelIsOpen(true)}>
                     <AddIcon />
                 </Fab>
             </div>
@@ -88,6 +96,10 @@ function Sidebar({ user, findFriend }) {
                 isOpen={modalIsOpen}
                 closeRequests={closeRequests}
                 element={document.getElementById('talky')}
+            />
+            <MyFriendsModal
+                isOpen={friendsModelIsOpen}
+                handleClose={handleClose}
             />
         </div>
     )

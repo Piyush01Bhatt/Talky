@@ -1,0 +1,44 @@
+.friend__list__main {
+    display: flex;
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f6f6f6;
+    justify-content: center;
+}
+
+.friend__list__main:hover {
+    background-color:#ebebeb
+}
+
+.friend__list__avatar {
+    padding: 5px;
+}
+
+.friend__list__info > h2 {
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.friend__list__info > p {
+    color:grey;
+    font-size:12px;
+}
+
+.friend__list__info {
+    margin-left: 15px;
+    margin-top:5px;
+    flex:1;
+}
+
+.add__icon {
+    color:green !important;
+    font-size: 28px !important;
+}
+
+.add__fab {
+    position: relative;
+}
+
+.add__to__recent:hover {
+    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75) 
+}

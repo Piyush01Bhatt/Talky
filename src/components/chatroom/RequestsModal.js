@@ -22,14 +22,14 @@ function RequestsModal({ isOpen, closeRequests, element }) {
       if (!res) {
         throw new Error('empty response')
       }
-      dispatch({
+      /*dispatch({
         type: "ADD_ROOM",
         item: {
           name: name,
           id: personId,
           status: status
         }
-      })
+      })*/
       let presentRequests = [...requests]
       presentRequests.splice(index, 1) // remove the request
       dispatch({

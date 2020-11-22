@@ -10,7 +10,9 @@ export const initialState = {
   },
   messages: [],
   recent_rooms: [], // {name,id}
-  requests: [] //{name,id,status}
+  requests: [], //{name,id,status}
+  fromMeRequestedFriends: [],
+  toMeRequestedFriends: []
 };
 
 export const reducer = (state, action) => {
@@ -56,6 +58,18 @@ export const reducer = (state, action) => {
       return {
         ...state,
         requests: [...action.item]
+      }
+    
+    case "ADD_FROM_ME_FRIENDS":
+      return {
+        ...state,
+        fromMeRequestedFriends: [...action.item]
+      }
+
+    case "ADD_TO_ME_FRIENDS":
+      return {
+        ...state,
+        toMeRequestedFriends: [...action.item]
       }
 
     default:

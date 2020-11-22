@@ -28,7 +28,7 @@ function RequestList({ name, status, personId, index, user, acceptRequest, rejec
 
     return (
         <div className="list__main">
-            <Avatar className="list__avatar" />
+            <Avatar className="list__avatar"/>
             <div className="list__info">
                 <h2>{name}</h2>
                 <p>{status}</p>

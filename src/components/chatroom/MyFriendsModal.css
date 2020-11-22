@@ -1,0 +1,18 @@
+.my__friends__modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none !important;
+    outline: none !important;
+    flex-direction: column;
+    overflow-x: hidden !important;
+}
+
+.my__friends__body {
+    background-color: white;
+    border: none !important;
+    outline: none !important;
+    height: 85vh;
+    width: 25vw;
+    overflow-x: hidden !important;
+}
