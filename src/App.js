@@ -77,7 +77,7 @@ class App extends React.Component {
     const flipStyle = {
       "width": "100%",
       "height": "100%",
-      "align-items": "center"
+      "alignItems": "center"
     }
     return (
       <div className="app" id="talky">

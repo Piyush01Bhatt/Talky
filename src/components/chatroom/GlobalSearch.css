@@ -1,32 +1,7 @@
-.Overlay {
-  z-index: 100;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(69, 74, 94,0.7);
-  padding: 3.2rem;
-  text-align: center;
-  border-radius: 0;
-}
-
-.Find_Friend_Modal{
-    border: none !important;
-    outline:none !important;
-    display:flex;
-    height:100vh;
-    flex-direction: column;
-    opacity: 1 !important;
-    align-items: center;
-}
-
 .findFriendModal__body{
     display: flex;
-    width: 30vw;
-    height:90%;
+    height: 83vh;
     flex-direction: column;
-    box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.75);
 }
 
 .findFriendModal__search {
@@ -35,6 +10,7 @@
     background-color:#f6f6f6;
     height:49px;
     padding:10px;
+    position:sticky;
 }
 
 .findFriendModal__searchContainer{
@@ -61,5 +37,16 @@
 .findFriendModal__friends{
     flex: 1;
     background-color: white;
-    overflow: scroll;
+    overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.findFriendModal__friends::-webkit-scrollbar {
+   display: none;
+}
+  
+/* Hide scrollbar for IE, Edge and Firefox */
+.findFriendModal__friends {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }

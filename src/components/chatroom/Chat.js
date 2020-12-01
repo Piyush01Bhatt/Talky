@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import dayjs from "dayjs"
+import relativeTime from 'dayjs/plugin/relativeTime'
 import "./Chat.css";
 import { Avatar, IconButton } from "@material-ui/core";
 import {
@@ -17,12 +19,24 @@ import axios from "../../helpers/axios";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import { useStateValue } from "../../StateProvider";
 
+dayjs.extend(relativeTime)
+
+function emptyCheck(value) {
+  return (Object.keys(value).length === 0
+    && value.constructor === Object)
+}
+
 function Chat({ sendMessage }) {
   const [
-    { user, room, messages },
+    { user, room, recent_rooms },
     dispatch,
   ] = useStateValue();
   const [input, setInput] = useState("");
+
+  useEffect(() => {
+    const chatWindow = document.getElementById('chatBody')
+    chatWindow.scrollTo(0,chatWindow.scrollHeight)
+  })
 
 
   return (
@@ -44,19 +58,19 @@ function Chat({ sendMessage }) {
         </div>
       </div>
 
-      <div className="chat__body">
-        {messages && messages.map((item, i) => (
+      <div className="chat__body" id="chatBody">
+        {room.id && recent_rooms[room.id].messages.map((item, i) => (
           item.from_name === user.name ?
             <ChatMessage
               name={user.name}
               messageBody={item.message}
-              timestamp={Date.now()}
+              timestamp={dayjs(item.timestamp).fromNow()}
             />
             :
             <ChatReceiver
               name={item.from_name}
               messageBody={item.message}
-              timestamp={Date.now()}
+              timestamp={dayjs(item.timestamp).fromNow()}
             />
         ))}
       </div>

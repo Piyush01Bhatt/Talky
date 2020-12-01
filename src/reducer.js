@@ -1,18 +1,9 @@
 export const initialState = {
-  user: {
-    name: "",
-    id: ""
-  },
-  room: {
-    name: '',
-    id: '',
-    key:-1
-  },
+  user: {},
+  room: {},
   messages: [],
-  recent_rooms: [], // {name,id}
+  recent_rooms: {}, // {name,id}
   requests: [], //{name,id,status}
-  fromMeRequestedFriends: [],
-  toMeRequestedFriends: []
 };
 
 export const reducer = (state, action) => {
@@ -27,14 +18,25 @@ export const reducer = (state, action) => {
       return {
         ...state,
         room:action.item,
-        messages:[]
       };
 
     case "ADD_ROOM":
       return {
         ...state,
-        recent_rooms: [...state.recent_rooms, action.item]
+        recent_rooms: {...state.recent_rooms, ...action.item}
       };
+
+    case "ADD_RECEIVED_MESSAGE":
+        const modified = {...state.recent_rooms}
+        modified[action.item.from_id].messages.push(action.item)
+        return {
+          ...state,
+          recent_rooms: {
+            ...modified 
+          }
+        }
+        /*state.recent_rooms[action.item.from_id].messages.push(action.item)
+        return state*/
 
     case "ADD_MESSAGE":
       return {
@@ -58,18 +60,6 @@ export const reducer = (state, action) => {
       return {
         ...state,
         requests: [...action.item]
-      }
-    
-    case "ADD_FROM_ME_FRIENDS":
-      return {
-        ...state,
-        fromMeRequestedFriends: [...action.item]
-      }
-
-    case "ADD_TO_ME_FRIENDS":
-      return {
-        ...state,
-        toMeRequestedFriends: [...action.item]
       }
 
     default:

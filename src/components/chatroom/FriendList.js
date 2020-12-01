@@ -2,7 +2,6 @@ import { Avatar, IconButton, CircularProgress } from '@material-ui/core'
 import React, {useState} from 'react'
 import AddIcon from '@material-ui/icons/Add';
 import "./FriendList.css"
-import { useStateValue } from '../../StateProvider'
 import { makeStyles } from '@material-ui/core/styles'
 import CheckIcon from '@material-ui/icons/Check';
 import { green } from '@material-ui/core/colors';

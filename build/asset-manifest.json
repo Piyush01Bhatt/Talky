@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.eda867da.chunk.css",
+    "main.js": "/static/js/main.d8ad5a26.chunk.js",
+    "main.js.map": "/static/js/main.d8ad5a26.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f7e5a495.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f7e5a495.js.map",
+    "static/js/2.3cf70d8c.chunk.js": "/static/js/2.3cf70d8c.chunk.js",
+    "static/js/2.3cf70d8c.chunk.js.map": "/static/js/2.3cf70d8c.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.eda867da.chunk.css.map": "/static/css/main.eda867da.chunk.css.map",
+    "static/js/2.3cf70d8c.chunk.js.LICENSE.txt": "/static/js/2.3cf70d8c.chunk.js.LICENSE.txt",
+    "static/media/logo.103b5fa1.svg": "/static/media/logo.103b5fa1.svg",
+    "static/media/manage_chats.5a5517dc.svg": "/static/media/manage_chats.5a5517dc.svg",
+    "static/media/talky_logo.e1293087.png": "/static/media/talky_logo.e1293087.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f7e5a495.js",
+    "static/js/2.3cf70d8c.chunk.js",
+    "static/css/main.eda867da.chunk.css",
+    "static/js/main.d8ad5a26.chunk.js"
+  ]
+}

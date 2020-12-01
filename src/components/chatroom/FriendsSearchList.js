@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import "./FriendSearchList.css"
 import { Avatar, IconButton } from '@material-ui/core'
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import axios from "../../helpers/axios"
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { makeStyles } from '@material-ui/core/styles'
@@ -60,7 +60,7 @@ function FriendsSearchList({ name, status, personId, index, user, received, requ
             return <CheckIcon className="request__icon"/>
         }
 
-        return <GroupAddIcon className="request__icon"/>
+        return <PersonAddIcon className="request__icon"/>
     }
     return (
         <div className="list__main">

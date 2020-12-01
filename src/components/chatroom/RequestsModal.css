@@ -1,5 +1,35 @@
-.drawer__menu{
+.drawer__body{
     width: 22vw;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+}
+
+.requests__heading {
+    height:7vh;
+    background-color: #4849a1;
+    color: white;
+    position: fixed;
+    width: inherit;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 20px;
+}
+
+.drawer__menu {
+    margin-top: 7vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.drawer__menu::-webkit-scrollbar {
+    display: none !important;
+  }
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.drawer__menu {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
 }
