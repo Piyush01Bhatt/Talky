@@ -9,6 +9,7 @@ import { green } from '@material-ui/core/colors';
 import CheckIcon from '@material-ui/icons/Check';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
+import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles((theme)=> ({
     buttonProgress: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme)=> ({
     }
   }))
 
-function FriendsSearchList({ name, status, personId, index, user, received, requested, accepted }) {
+function FriendsSearchList({ name, status, personId, index, user, received, requested, accepted, isSelf }) {
     const classes = useStyles();
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
@@ -47,6 +48,11 @@ function FriendsSearchList({ name, status, personId, index, user, received, requ
     }
 
     const getIcon = () => {
+
+        if(isSelf) {
+            return <PersonIcon className="request__icon"/>
+        }
+
         if (requested && !accepted) {
             return <CheckIcon className="request__icon"/>
         }
@@ -71,7 +77,7 @@ function FriendsSearchList({ name, status, personId, index, user, received, requ
             </div>
             <div className="fab">
                 <IconButton onClick={() => sendRequest()}
-                    disabled={accepted || requested || received || success}
+                    disabled={accepted || requested || received || success || isSelf}
                     className="send__request">
                     {getIcon()}
                 </IconButton>

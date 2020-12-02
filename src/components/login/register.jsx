@@ -50,7 +50,7 @@ export const Register = props => {
   }
 
   return (
-    <div className="base-container" id="register_base" ref={props.containerRef}>
+    <div className="base-container" id="register_base">
       <div className="topHeader">
         <img src={talkyLogo} alt="talky"></img>
         <div className='mui__button'>

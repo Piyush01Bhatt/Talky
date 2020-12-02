@@ -1,7 +1,6 @@
 import { SearchOutlined } from "@material-ui/icons";
 import React, { useState} from "react";
 import "./GlobalSearch.css";
-import CancelIcon from "@material-ui/icons/Cancel";
 import { IconButton } from "@material-ui/core";
 import FriendsSearchList from "./FriendsSearchList"
 import axios from "../../helpers/axios"
@@ -25,7 +24,7 @@ function GlobalSearch() {
   const [people, setPeople] = useState([])
   const [searchText, setSearchText] = useState('')
   const [loading, setLoading] = useState(false)
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user },] = useStateValue();
 
   const classes = useStyles()
 
@@ -38,7 +37,6 @@ function GlobalSearch() {
       if (!res) {
         throw new Error('empty response')
       }
-      console.log(res.data.data)
       setLoading(false)
       setPeople(res.data.data)
     } catch (e) {
@@ -71,6 +69,8 @@ function GlobalSearch() {
               name={item.name}
               status={item.status}
               index={i}
+              key={i}
+              isSelf={item.isSelf}
               received={item.received}
               requested={item.requested}
               accepted={item.accepted}

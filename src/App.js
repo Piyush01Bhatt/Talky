@@ -1,124 +1,80 @@
-import React from "react";
-import logo from "./logo.svg";
-import banner from "./manage_chats.svg"
+import React, { useState } from "react";
 import "./App.scss";
-import { Login } from "./components/login";
-import { Register } from "./components/login";
 import Chatroom from "./components/chatroom/Chatroom";
 import axios from "./helpers/axios";
-import { useStateValue } from "./StateProvider";
 import { SocketProvider } from "./components/chatroom/SocketProvider";
-import ReactCardFlip from 'react-card-flip';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import LoginRoom from "./components/login/LoginRoom"
+import { useStateValue } from "./StateProvider"
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoginActive: true,
-      isChatroomActive: false,
-      user: {},
-      loginEmail: "",
-      loginPwd: "",
-      isFlipped: false
-    };
-  }
+function App() {
+  const [{ onlineStatus }, dispatch] = useStateValue()
+  const [user, setUser] = useState({})
+  const [loginEmail, setLoginEmail] = useState("")
+  const [loginPwd, setLoginPwd] = useState("")
+  const [isFlipped, setIsFlipped] = useState(false)
 
-  componentDidMount() {
-  }
-
-  processLogin = async (setLoading) => {
+  const processLogin = async (setLoading) => {
     try {
       let res = await axios.post("/user/login", {
-        email: this.state.loginEmail,
-        password: this.state.loginPwd,
+        email: loginEmail,
+        password: loginPwd,
       });
       const resUser = res.data;
       console.log(resUser)
-      if(! resUser._id){
+      if (!resUser._id) {
         throw new Error('undefined id received')
       }
       console.log(`resUser = ${resUser}`);
-      this.setState((prevState) => ({
-        isLoginActive: false,
-        isChatroomActive: !prevState.isChatroomActive,
-        user: resUser,
-      }));
-
+      setUser(resUser)
+      dispatch({
+        type: 'SET_ONLINE'
+      })
     } catch (e) {
       console.log(e.message);
       alert("login failed");
     } finally {
       setLoading(false) // setLoading hook from login component
     }
-  };
-
-  processLoginEmail = (e) => {
-    this.setState({ loginEmail: e.target.value });
-  };
-
-  processLoginPassword = (e) => {
-    this.setState({ loginPwd: e.target.value });
-  };
-
-  flip = () => {
-    this.setState((prevState) => ({
-      ...this.state,
-      isFlipped: !prevState.isFlipped,
-    }))
   }
 
-  render() {
-    const {
-      isLoginActive,
-      isChatroomActive,
-      user
-    } = this.state;
-    const flipStyle = {
-      "width": "100%",
-      "height": "100%",
-      "alignItems": "center"
-    }
-    return (
-      <div className="app" id="talky">
-        <div className="app__container">
-          { isLoginActive &&
-            <div className="banner">
-              <div className="banner_image">
-                <img src={banner} alt={"banner"}></img>
-                <h1>Join and start connecting with your loved ones.</h1>
-              </div>
-            </div>
-          }
-          <div className="login">
-            <div className="container">
-              {isLoginActive &&
-                <ReactCardFlip isFlipped={this.state.isFlipped}
-                  containerStyle={flipStyle}
-                  flipDirection="horizontal"
-                >
-                  <Login
-                    containerRef={(ref) => (this.current = ref)}
-                    processLogin={this.processLogin}
-                    processLoginEmail={this.processLoginEmail}
-                    processLoginPassword={this.processLoginPassword}
-                    flip={this.flip}
-                  />
-                  <Register containerRef={(ref) => (this.current = ref)}
-                    flip={this.flip}
-                  />
-                </ReactCardFlip>
-              }
-              {isChatroomActive && (
-                <SocketProvider id={user._id} user={user}>
-                  <Chatroom user={user} />
-                </SocketProvider>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+  const processLoginEmail = (e) => {
+    setLoginEmail(e.target.value)
+  };
+
+  const processLoginPassword = (e) => {
+    setLoginPwd(e.target.value)
+  };
+
+  const flip = () => {
+    setIsFlipped(!isFlipped)
   }
+
+  const flipStyle = {
+    "width": "100%",
+    "height": "100%",
+    "alignItems": "center"
+  }
+
+  return (
+    <div className="app" id="talky">
+      { onlineStatus ?  
+        (
+          <SocketProvider id={user._id} user={user}>
+            <Chatroom user={user} />
+          </SocketProvider>
+        )
+        :
+        <LoginRoom
+          flipStyle={flipStyle}
+          isFlipped={isFlipped}
+          processLogin={processLogin}
+          processLoginEmail={processLoginEmail}
+          processLoginPassword={processLoginPassword}
+          flip={flip}
+        />
+      }
+    </div>
+  );
 }
-export default App;
+
+export default App

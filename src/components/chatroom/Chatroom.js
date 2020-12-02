@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Chatroom.css";
 import { useStateValue } from "../../StateProvider";
 
@@ -7,7 +7,7 @@ import Sidebar from "./Sidebar";
 import { useSocket } from "./SocketProvider";
 
 function Chatroom({ user }) {
-  const [{ room, recent_rooms }, dispatch] = useStateValue();
+  const [{ room, recent_rooms },] = useStateValue();
   const socket = useSocket();
 
   const sendMessage = (e, message) => {

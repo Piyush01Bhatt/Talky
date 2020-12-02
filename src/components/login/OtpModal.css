@@ -1,8 +1,13 @@
 .Overlay {
-  z-index: 100 !important;
-  width: inherit !important;
-  height: inherit !important;
-  background-color: rgba(0, 0, 0, 0.55) !important;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(69, 74, 94,0.7);
+  padding: 3.2rem;
+  text-align: center;
   border-bottom-right-radius: 25px !important;
   border-top-right-radius: 25px !important;
 }

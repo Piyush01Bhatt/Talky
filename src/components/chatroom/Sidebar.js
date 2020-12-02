@@ -13,6 +13,9 @@ import Fab from '@material-ui/core/Fab';
 import MyFriendsModal from './MyFriendsModal';
 import axios from '../../helpers/axios';
 import CircularProgress from '@material-ui/core/CircularProgress'
+import ToggleOnIcon from '@material-ui/icons/ToggleOn';
+import ToggleOffIcon from '@material-ui/icons/ToggleOff';
+import { useSocket } from "./SocketProvider";
 
 const useStyles = makeStyles((theme) => ({
     fab: {
@@ -21,26 +24,22 @@ const useStyles = makeStyles((theme) => ({
         right: theme.spacing(2),
     },
     buttonProgress: {
-        //color: '#454fbe',
-        color: '#fff',
+        color: '#454fbe',
+        //color: '#fff',
         position: 'absolute',
         top: '50%',
         left: '50%',
-        marginTop: -56,
-        marginLeft: -56,
+        marginTop: 10,
+        marginLeft: 10,
     }
 }));
 
-async function loadFriendList(userId, dispatch) {
-
-}
-
 function Sidebar({ user }) {
 
-    const [{ recent_rooms }, dispatch] = useStateValue();
+    const [{ recent_rooms, onlineStatus }, dispatch] = useStateValue();
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [friendsModelIsOpen, setFriendsModelIsOpen] = useState(false)
-    const [friendsLoading, setFriendsLoading] = useState(false)
+    const socket = useSocket();
     const classes = useStyles();
 
     const processRoomClick = (roomName, roomId, key) => {
@@ -58,14 +57,15 @@ function Sidebar({ user }) {
         (async function loadFriendList() {
             const res = await axios.get(`/friends/get_friendlist/${user._id}/${1}/${30}`)
             const addItem = {}
+            console.log(res.data.data)
             res.data.data.forEach((item, i) => {
                 addItem[item.friendId] = {
                     name: item.name,
                     status: item.status,
-                    messages: []
+                    messages: [],
+                    isOnline: item.isOnline
                 }
-            })
-            
+            })              
             dispatch({
                 item: addItem,
                 type: 'ADD_ROOM'
@@ -83,6 +83,20 @@ function Sidebar({ user }) {
 
     const openFriendsModel = async () => {
         setFriendsModelIsOpen(true)
+    }
+
+    function emptyCheck(value) {
+        return Object.keys(value).length === 0
+        && value.constructor === Object
+    }
+
+    const logout = () => {
+        dispatch({
+            type: 'LOGOUT',
+        })
+        if(socket){
+          socket.disconnect()
+        }
     }
 
     return (
@@ -103,6 +117,13 @@ function Sidebar({ user }) {
                         <DonutLargeIcon />
                     </IconButton>
                 </div>
+
+                <div className="sidebar__left__footer">
+                    <IconButton className='online_button'
+                       onClick={()=>logout()} >
+                        {onlineStatus? <ToggleOnIcon/>:<ToggleOffIcon />}
+                    </IconButton>
+                </div>
             </div>
             <div className="sidebar__right">
                 <div className="sidebar__search">
@@ -113,7 +134,7 @@ function Sidebar({ user }) {
                 </div>
 
                 <div className="sidebar__chats">
-                    {(recent_rooms) && Object.entries(recent_rooms).map((item, index) => (
+                    {(emptyCheck(recent_rooms)) ? <CircularProgress size={34} className={classes.buttonProgress} /> : Object.entries(recent_rooms).map((item, index) => (
                         <SidebarChat
                             onClick={processRoomClick}
                             roomName={item[1].name}
@@ -129,11 +150,9 @@ function Sidebar({ user }) {
                         className={classes.fab}
                         onClick={() => {
                             openFriendsModel()
-                        }}
-                        disabled={friendsLoading}>
+                        }}>
                         <PersonAddIcon />
                     </Fab>
-                    {friendsLoading && <CircularProgress size={24} className={classes.buttonProgress} />}
                 </div>
             </div>
             <RequestsModal

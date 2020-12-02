@@ -20,6 +20,10 @@
     flex:0.10;
 }
 
+.sidebar__left__footer{
+    position: sticky
+}
+
 .avatar__container {
     padding: 5px;
 }
@@ -31,13 +35,22 @@
 .sidebar__headerRight{
     display:flex;
     flex-direction: column;
+    flex:1;
     align-items: center;
-    justify-content:space-between;
     margin-top: 10vh;
 }
 
 .action_button:hover {
     color:white !important;
+    background-color: #6264af !important;
+}
+
+.online_button {
+    color:green !important;
+}
+
+.online_button:hover {
+    color:red !important;
     background-color: #6264af !important;
 }
 

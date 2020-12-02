@@ -36,8 +36,23 @@
 }
 
 .sidebarChat__info {
-    margin-left: 15px;
+    margin-left: 10px;
     padding:5px;
     text-align: left;
     font-family: sans-serif;
+}
+
+.avatar__div {
+    display: flex;
+    flex-direction: row;
+}
+
+.status__offline {
+    font-size: 12px !important;
+    color: red !important;
+}
+
+.status__online {
+    font-size: 12px !important;
+    color: green !important;
 }

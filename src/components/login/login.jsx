@@ -21,7 +21,7 @@ export const Login = props => {
   const [loading, setLoading] = useState(false)
 
   return (
-    <div className='base-container' ref={props.containerRef}>
+    <div className='base-container'>
       <div className='topHeader'>
         <img src={talkyLogo} alt='talky'></img>
         <div className='mui__button'>

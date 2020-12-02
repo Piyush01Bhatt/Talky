@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './RequestsModal.css'
 import { Drawer } from '@material-ui/core'
 import axios from '../../helpers/axios'
@@ -22,7 +22,8 @@ function RequestsModal({ isOpen, closeRequests, element }) {
       item[personId] = {
         name,
         status,
-        messages:[]
+        messages:[],
+        isOnline: false
       }
       dispatch({
         item,
@@ -78,6 +79,7 @@ function RequestsModal({ isOpen, closeRequests, element }) {
                   personId={item.fo_id}
                   user={user}
                   index={i}
+                  key={i}
                   acceptRequest={acceptRequest}
                   rejectRequest={rejectRequest}
                 />

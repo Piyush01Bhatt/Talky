@@ -4,32 +4,20 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import "./Chat.css";
 import { Avatar, IconButton } from "@material-ui/core";
 import {
-  AttachFile,
-  MoreVert,
-  SearchOutlined,
-  InsertEmoticon,
-  SettingsInputAntenna,
-  MessageSharp,
+  AttachFile
 } from "@material-ui/icons";
 import ChatMessage from "./ChatReceiver";
 import ChatReceiver from "./ChatMessage";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
-import axios from "../../helpers/axios";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import { useStateValue } from "../../StateProvider";
 
 dayjs.extend(relativeTime)
 
-function emptyCheck(value) {
-  return (Object.keys(value).length === 0
-    && value.constructor === Object)
-}
-
 function Chat({ sendMessage }) {
   const [
     { user, room, recent_rooms },
-    dispatch,
   ] = useStateValue();
   const [input, setInput] = useState("");
 
@@ -64,11 +52,13 @@ function Chat({ sendMessage }) {
             <ChatMessage
               name={user.name}
               messageBody={item.message}
+              key={i}
               timestamp={dayjs(item.timestamp).fromNow()}
             />
             :
             <ChatReceiver
               name={item.from_name}
+              key={i}
               messageBody={item.message}
               timestamp={dayjs(item.timestamp).fromNow()}
             />

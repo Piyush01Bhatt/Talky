@@ -11,7 +11,7 @@ export function useSocket() {
 
 export function SocketProvider({ id, user, children }) {
     const [socket, setSocket] = useState()
-    const [state, dispatch] = useStateValue()
+    const [, dispatch] = useStateValue()
 
     useEffect(() => {
         console.log('SocketProvider')
@@ -21,7 +21,35 @@ export function SocketProvider({ id, user, children }) {
         );
         setSocket(newSocket)
 
-        newSocket.on("received-friend-request", (requestInfo) => {
+        newSocket.on('connect', () => {
+            newSocket.emit('online', {
+                id
+            })
+        })
+
+        newSocket.on('socket-online',(message) => {
+            dispatch({
+                type: "SET_ROOM_ONLINE",
+                item: {
+                    id: message.id
+                }
+            })
+        })
+
+        newSocket.on('socket-offline',(message) => {
+            dispatch({
+                type: "SET_ROOM_OFFLINE",
+                item: {
+                    id: message.id
+                }
+            })
+        })
+
+        newSocket.on('disconnect', () => {
+            console.log('offline')
+        })
+
+        newSocket.on("received-friend-request", (requestInfo) => { 
             dispatch({
                 type: 'ADD_REQUEST',
                 item: {
@@ -37,7 +65,8 @@ export function SocketProvider({ id, user, children }) {
             item[acceptedInfo.friendId] = {
                 name: acceptedInfo.name,
                 status: acceptedInfo.status,
-                messages: []
+                messages: [],
+                isOnline: true
             }
             dispatch({
                 item,

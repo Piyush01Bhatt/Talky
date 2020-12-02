@@ -1,4 +1,7 @@
-
+.chatroom__main {
+  border-top-left-radius: 25px !important;
+  border-bottom-left-radius: 25px !important;
+}
 .chatroom__body {
   display: flex;
   position: relative;

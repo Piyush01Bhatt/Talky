@@ -2,14 +2,18 @@ import React from 'react'
 import './SidebarChat.css'
 import { Avatar } from '@material-ui/core'
 import { useStateValue } from '../../StateProvider'
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 
-function SidebarChat ({ onClick, roomName, index, roomId }) {
-  const [{ room }] = useStateValue()
+function SidebarChat({ onClick, roomName, index, roomId }) {
+  const [{ room, recent_rooms }] = useStateValue()
   return (
     <div className={(room.key === index) ? ('sidebarChat '.concat('sidebarChat_selected')) : 'sidebarChat'}
       onClick={() => onClick(roomName, roomId, index)}
     >
-      <Avatar className="sidebarChat__avatar" />
+      <div className="avatar__div">
+        <Avatar className="sidebarChat__avatar"/>
+        <FiberManualRecordIcon className={recent_rooms[roomId].isOnline?"status__online":"status__offline"}/>
+      </div>
       <div className="sidebarChat__info">
         <h2>{roomName}</h2>
         <p>This is the last message .</p>
