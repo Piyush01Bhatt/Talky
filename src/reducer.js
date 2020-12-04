@@ -1,6 +1,7 @@
 export const initialState = {
   user: {},
   onlineStatus: false,
+  requestsCounter: 0,
   room: {},
   messages: [],
   recent_rooms: {}, // {name,id}
@@ -21,6 +22,25 @@ export const reducer = (state, action) => {
         onlineStatus: true
       }
 
+    case "SET_REQUESTS_COUNTER":
+      return {
+        ...state,
+        requestsCounter: action.item
+      }
+
+    case "INCREMENT_REQUESTS_COUNTER":
+      return {
+        ...state,
+        requestsCounter: state.requestsCounter + 1
+      }
+
+    case "DECREMENT_REQUESTS_COUNTER":
+      return {
+        ...state,
+        requestsCounter: state.requestsCounter - 1
+      }
+
+
     case "LOGOUT":
       return {
         ...initialState
@@ -32,11 +52,20 @@ export const reducer = (state, action) => {
         onlineStatus: false
       }
 
-
     case "SET_ROOM":
+      const modifyUnread = {
+        ...state.recent_rooms[action.item.id],
+        unreadNum: 0
+      }
       return {
         ...state,
         room: action.item,
+        recent_rooms: {
+          ...state.recent_rooms,
+          [action.item.id]: {
+            ...modifyUnread
+          }
+        }
       };
 
     case "ADD_ROOM":
@@ -46,7 +75,7 @@ export const reducer = (state, action) => {
       };
 
     case "SET_ROOM_ONLINE":
-      if (!(action.item.id in state.recent_rooms)){
+      if (!(action.item.id in state.recent_rooms)) {
         return state
       }
       const modifiedRoom = {
@@ -64,7 +93,7 @@ export const reducer = (state, action) => {
       }
 
     case "SET_ROOM_OFFLINE":
-      if (!(action.item.id in state.recent_rooms)){
+      if (!(action.item.id in state.recent_rooms)) {
         return state
       }
       const modiRoom = {
@@ -84,10 +113,19 @@ export const reducer = (state, action) => {
     case "ADD_RECEIVED_MESSAGE":
       /*const modified = {...state.recent_rooms}
       modified[action.item.from_id].messages.push(action.item)*/
+      /*if(!(state.room.id === action.item.from_id)){
+        const modified = {
+          ...state.recent_rooms[action.item.from_id],
+          messages: [...state.recent_rooms[action.item.from_id].messages, action.item],
+          unreadNum: 0
+        }
+      }*/
       const modified = {
         ...state.recent_rooms[action.item.from_id],
-        messages: [...state.recent_rooms[action.item.from_id].messages, action.item]
+        messages: [...state.recent_rooms[action.item.from_id].messages, action.item],
+        unreadNum: (state.room.id === action.item.from_id)?0:state.recent_rooms[action.item.from_id].unreadNum + 1
       }
+      
       return {
         ...state,
         recent_rooms: {

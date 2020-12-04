@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme)=> ({
     }
   }))
 
-function RequestList({ name, status, personId, index, user, acceptRequest, rejectRequest }) {
+function RequestList({ name, status, personId, index, user, acceptRequest, rejectRequest, isOnline }) {
     const classes = useStyles();
     const [loadingAccept, setLoadingAccept] = useState(false)
     const [loadingReject, setLoadingReject] = useState(false)
@@ -32,7 +32,7 @@ function RequestList({ name, status, personId, index, user, acceptRequest, rejec
                 <p>{status}</p>
             </div>
             <div className="accept__fab">
-                <IconButton onClick={(e)=>acceptRequest(index,personId,name,status,setLoadingAccept)}>
+                <IconButton onClick={(e)=>acceptRequest(index,personId,name,status,isOnline,setLoadingAccept)}>
                     <CheckIcon className="accept__icon" />
                 </IconButton>
                 {loadingAccept && <CircularProgress size={38} className={classes.buttonProgress}/>}

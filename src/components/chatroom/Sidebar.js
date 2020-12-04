@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Sidebar({ user }) {
 
-    const [{ recent_rooms, onlineStatus }, dispatch] = useStateValue();
+    const [{ room,recent_rooms, onlineStatus, requestsCounter }, dispatch] = useStateValue();
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [friendsModelIsOpen, setFriendsModelIsOpen] = useState(false)
     const socket = useSocket();
@@ -63,9 +63,10 @@ function Sidebar({ user }) {
                     name: item.name,
                     status: item.status,
                     messages: [],
-                    isOnline: item.isOnline
+                    isOnline: item.isOnline,
+                    unreadNum: 0,
                 }
-            })              
+            })
             dispatch({
                 item: addItem,
                 type: 'ADD_ROOM'
@@ -87,16 +88,20 @@ function Sidebar({ user }) {
 
     function emptyCheck(value) {
         return Object.keys(value).length === 0
-        && value.constructor === Object
+            && value.constructor === Object
     }
 
     const logout = () => {
         dispatch({
             type: 'LOGOUT',
         })
-        if(socket){
-          socket.disconnect()
+        if (socket) {
+            socket.disconnect()
         }
+    }
+
+    const compareRooms = (a,b) => {
+        return b[1].unreadNum - a[1].unreadNum
     }
 
     return (
@@ -107,9 +112,12 @@ function Sidebar({ user }) {
                 </div>
 
                 <div className="sidebar__headerRight">
-                    <IconButton className="action_button" onClick={(e) => setModalIsOpen(true)}>
-                        <PeopleAltIcon />
-                    </IconButton>
+                    <div className="requests__btn__div">
+                        <IconButton className="action_button" onClick={(e) => setModalIsOpen(true)}>
+                            <PeopleAltIcon />
+                        </IconButton>
+                        {(requestsCounter>0)&&<h3>{requestsCounter}</h3>}
+                    </div>
                     <IconButton className="action_button">
                         <ChatIcon />
                     </IconButton>
@@ -120,8 +128,8 @@ function Sidebar({ user }) {
 
                 <div className="sidebar__left__footer">
                     <IconButton className='online_button'
-                       onClick={()=>logout()} >
-                        {onlineStatus? <ToggleOnIcon/>:<ToggleOffIcon />}
+                        onClick={() => logout()} >
+                        {onlineStatus ? <ToggleOnIcon /> : <ToggleOffIcon />}
                     </IconButton>
                 </div>
             </div>
@@ -134,13 +142,14 @@ function Sidebar({ user }) {
                 </div>
 
                 <div className="sidebar__chats">
-                    {(emptyCheck(recent_rooms)) ? <CircularProgress size={34} className={classes.buttonProgress} /> : Object.entries(recent_rooms).map((item, index) => (
+                    {(emptyCheck(recent_rooms)) ? <CircularProgress size={34} className={classes.buttonProgress} /> : Object.entries(recent_rooms).sort(compareRooms).map((item, index) => (
                         <SidebarChat
                             onClick={processRoomClick}
                             roomName={item[1].name}
                             index={index}
                             key={index}
                             roomId={item[0]}
+                            isSelected={room.id===item[0]}
                         />
                     ))
                     }

@@ -8,7 +8,7 @@ import { useStateValue } from '../../StateProvider'
 function RequestsModal({ isOpen, closeRequests, element }) {
   const [{ requests, user }, dispatch] = useStateValue();
 
-  const acceptRequest = async (index, personId, name, status, setLoading) => {
+  const acceptRequest = async (index, personId, name, status, isOnline, setLoading) => {
     setLoading(true)
     try {
       const res = await axios.post('/friends/accept_request', {
@@ -23,7 +23,8 @@ function RequestsModal({ isOpen, closeRequests, element }) {
         name,
         status,
         messages:[],
-        isOnline: false
+        isOnline: isOnline,
+        unreadNum: 0
       }
       dispatch({
         item,
@@ -34,6 +35,9 @@ function RequestsModal({ isOpen, closeRequests, element }) {
       dispatch({
         type: "RESET_REQUESTS",
         item: presentRequests
+      })
+      dispatch({
+        type: "DECREMENT_REQUESTS_COUNTER"
       })
     } catch (err) {
       console.log(err)
@@ -77,6 +81,7 @@ function RequestsModal({ isOpen, closeRequests, element }) {
                   name={item.sentUserName}
                   status={item.sentUserStatus}
                   personId={item.fo_id}
+                  isOnline={item.sentUserIsOnline}
                   user={user}
                   index={i}
                   key={i}

@@ -55,8 +55,13 @@ export function SocketProvider({ id, user, children }) {
                 item: {
                     sentUserName: requestInfo.from,
                     fo_id: requestInfo.id,
-                    sentUserStatus: requestInfo.status
+                    sentUserStatus: requestInfo.status,
+                    sentUserIsOnline: requestInfo.isOnline
                 }
+            })
+
+            dispatch({
+                type: "INCREMENT_REQUESTS_COUNTER"
             })
         })
 
@@ -66,7 +71,8 @@ export function SocketProvider({ id, user, children }) {
                 name: acceptedInfo.name,
                 status: acceptedInfo.status,
                 messages: [],
-                isOnline: true
+                isOnline: true,
+                unreadNum: 0
             }
             dispatch({
                 item,
@@ -105,6 +111,10 @@ export function SocketProvider({ id, user, children }) {
                     dispatch({
                         type: 'ADD_REQUESTS',
                         item: res.data.data
+                    })
+                    dispatch({
+                        type: 'SET_REQUESTS_COUNTER',
+                        item: res.data.data.length
                     })
                 })
         } catch (err) {
