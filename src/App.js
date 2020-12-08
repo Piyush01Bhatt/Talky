@@ -52,6 +52,7 @@ function App() {
         type: 'SET_ONLINE'
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const processLoginEmail = (e) => {

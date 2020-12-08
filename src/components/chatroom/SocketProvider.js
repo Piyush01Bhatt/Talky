@@ -123,6 +123,7 @@ export function SocketProvider({ id, user, children }) {
 
 
         return () => newSocket.close()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
