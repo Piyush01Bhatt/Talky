@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import "./Chatroom.css";
 import { useStateValue } from "../../StateProvider";
 import EmptyChatPage from './EmptyChatPage'
@@ -46,7 +46,7 @@ function Chatroom({ user }) {
 
   function emptyCheck(value) {
     return Object.keys(value).length === 0
-      && value.constructor === Object; // 👈 constructor check
+      && value.constructor === Object;
   }
 
   return (
