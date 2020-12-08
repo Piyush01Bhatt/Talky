@@ -10,7 +10,6 @@ import ChatMessage from "./ChatReceiver";
 import ChatReceiver from "./ChatMessage";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
-import VideoCallIcon from "@material-ui/icons/VideoCall";
 import { useStateValue } from "../../StateProvider";
 
 dayjs.extend(relativeTime)
@@ -26,20 +25,16 @@ function Chat({ sendMessage }) {
     chatWindow.scrollTo(0,chatWindow.scrollHeight)
   })
 
-
   return (
     <div className="chat">
       <div className="chat__header">
         <Avatar className="chat__header__avatar" />
         <div className="chat__headerInfo">
           <h3>{room.name}</h3>
-          <p>Last seen at...</p>
+          <p></p>
         </div>
 
         <div className="chat__headerRight">
-          <IconButton className="inactive__button" disabled={true}>
-            <VideoCallIcon />
-          </IconButton>
           <IconButton className="inactive__button" disabled={true}>
             <AttachFile />
           </IconButton>

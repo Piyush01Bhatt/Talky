@@ -109,6 +109,7 @@
 
 .otp__resend {
   margin-left: 20px;
+  position: relative;
 }
 
 .otpresend__button:hover{

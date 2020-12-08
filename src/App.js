@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import Chatroom from "./components/chatroom/Chatroom";
 import axios from "./helpers/axios";
@@ -24,7 +24,9 @@ function App() {
       if (!resUser._id) {
         throw new Error('undefined id received')
       }
-      console.log(`resUser = ${resUser}`);
+      localStorage.setItem('userId', resUser._id)
+      localStorage.setItem('userStatus', resUser.status)
+      localStorage.setItem('userName', resUser.name)
       setUser(resUser)
       dispatch({
         type: 'SET_ONLINE'
@@ -36,6 +38,21 @@ function App() {
       setLoading(false) // setLoading hook from login component
     }
   }
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId')
+    if (userId) {
+      const resUser = {
+        name : localStorage.getItem('userName'),
+        _id : localStorage.getItem('userId'),
+        status: localStorage.getItem('userStatus')
+      }
+      setUser(resUser)
+      dispatch({
+        type: 'SET_ONLINE'
+      })
+    }
+  }, [])
 
   const processLoginEmail = (e) => {
     setLoginEmail(e.target.value)

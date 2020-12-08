@@ -1,7 +1,7 @@
 import React from "react";
 import "./Chatroom.css";
 import { useStateValue } from "../../StateProvider";
-
+import EmptyChatPage from './EmptyChatPage'
 import Chat from "./Chat";
 import Sidebar from "./Sidebar";
 import { useSocket } from "./SocketProvider";
@@ -44,11 +44,16 @@ function Chatroom({ user }) {
     });
   };
 
+  function emptyCheck(value) {
+    return Object.keys(value).length === 0
+      && value.constructor === Object; // 👈 constructor check
+  }
+
   return (
     <div className="chatroom__main" id="chatroom">
       <div className="chatroom__body" id="chatroomBody">
         <Sidebar user={user} />
-        <Chat sendMessage={sendMessage} />
+        {emptyCheck(room)?<EmptyChatPage/>:<Chat sendMessage={sendMessage} />}
       </div>
     </div>
   );

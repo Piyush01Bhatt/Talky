@@ -16,7 +16,7 @@ export function SocketProvider({ id, user, children }) {
     useEffect(() => {
         console.log('SocketProvider')
         const newSocket = io(
-            "http://0.0.0.0:8001",
+            "https://talky-backend.herokuapp.com",
             { query: { id } }
         );
         setSocket(newSocket)

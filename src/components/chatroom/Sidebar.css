@@ -70,6 +70,15 @@
     font-size: 25px !important;
 }
 
+.action_button > .MuiSvgIcon-root {
+    font-size: 25px !important;
+}
+
+.action_button_selected {
+    color    :#fff !important;
+    font-size: 25px !important;
+}
+
 .inactive_button{
     color    :#6264af !important;
     font-size: 25px !important;

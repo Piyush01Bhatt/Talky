@@ -7,7 +7,14 @@
     align-items: center;
 }
 
+
 .sidebarChat_selected{
+    display:flex;
+    height: 60px;
+    padding:10px;
+    cursor:pointer;
+    border-bottom: 1px solid #ededed;
+    align-items: center;
     /*background-color:#ebebeb*/
     border-left: 3px solid red;
     /*background-color: #f8dadc;*/
@@ -18,11 +25,12 @@
 
 .sidebarChat:hover {
     /*background-color:#ebebeb*/
-    border-left: 3px solid red;
+    background-image: linear-gradient(to right,#ebebeb,#f9f9fc);
+    /*border-left: 3px solid red;*/
     /*background-color: #f8dadc;*/
-    background-image: linear-gradient(to right,#f8d9db,#f9f9fc);
+    /*background-image: linear-gradient(to right,#f8d9db,#f9f9fc);*/
     /*background-color: white;*/
-    margin-right: 0px;
+    /*margin-right: 0px;*/
 }
 
 .sidebarChat__info > h2 {
@@ -38,6 +46,7 @@
 .sidebarChat__info {
     margin-left: 10px;
     padding:5px;
+    flex: 1;
     text-align: left;
     font-family: sans-serif;
 }
@@ -45,6 +54,19 @@
 .avatar__div {
     display: flex;
     flex-direction: row;
+}
+
+.sidebarChat__unreadNum {
+    background-color: #f37677;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.sidebarChat__unreadNum > h3{
+    padding:3px;
+    font-size: 0.8em;
+    color: white;
 }
 
 .status__offline {

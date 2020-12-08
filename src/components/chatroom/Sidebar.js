@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import "./Sidebar.css";
-import DonutLargeIcon from "@material-ui/icons/DonutLarge"
 import ChatIcon from "@material-ui/icons/Chat"
 import { IconButton, Avatar, makeStyles } from '@material-ui/core';
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import SidebarChat from "./SidebarChat"
 import { useStateValue } from '../../StateProvider'
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import RequestsModal from './RequestsModal'
 import Fab from '@material-ui/core/Fab';
@@ -16,6 +15,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import ToggleOnIcon from '@material-ui/icons/ToggleOn';
 import ToggleOffIcon from '@material-ui/icons/ToggleOff';
 import { useSocket } from "./SocketProvider";
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
     fab: {
@@ -34,13 +34,24 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const useStylesBootstrap = makeStyles((theme) => ({
+    arrow: {
+        color: theme.palette.common.black,
+    },
+    tooltip: {
+        backgroundColor: '#f37677',
+    },
+}));
+
+
 function Sidebar({ user }) {
 
-    const [{ room,recent_rooms, onlineStatus, requestsCounter }, dispatch] = useStateValue();
+    const [{ room, recent_rooms, onlineStatus, requestsCounter }, dispatch] = useStateValue();
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [friendsModelIsOpen, setFriendsModelIsOpen] = useState(false)
     const socket = useSocket();
     const classes = useStyles();
+    const classesTooltip = useStylesBootstrap();
 
     const processRoomClick = (roomName, roomId, key) => {
         dispatch({
@@ -100,8 +111,14 @@ function Sidebar({ user }) {
         }
     }
 
-    const compareRooms = (a,b) => {
-        return b[1].unreadNum - a[1].unreadNum
+    const compareRooms = (a, b) => {
+        //return b[1].unreadNum - a[1].unreadNum
+        if ((b[1].messages.length > 0) && (a[1].messages.length > 0)) {
+            const lastMessageTimestamp1 = b[1].messages[b[1].messages.length - 1].timestamp
+            const lastMessageTimestamp2 = a[1].messages[a[1].messages.length - 1].timestamp
+            return lastMessageTimestamp1 - lastMessageTimestamp2
+        }
+        return -1
     }
 
     return (
@@ -113,24 +130,27 @@ function Sidebar({ user }) {
 
                 <div className="sidebar__headerRight">
                     <div className="requests__btn__div">
-                        <IconButton className="action_button" onClick={(e) => setModalIsOpen(true)}>
-                            <PeopleAltIcon />
-                        </IconButton>
-                        {(requestsCounter>0)&&<h3>{requestsCounter}</h3>}
+                        <Tooltip classes={classesTooltip} title="Friend Requests" placement="left" arrow>
+                            <IconButton className="action_button" onClick={(e) => setModalIsOpen(true)}>
+                                <PersonPinIcon />
+                            </IconButton>
+                        </Tooltip>
+                        {(requestsCounter > 0) && <h3>{requestsCounter}</h3>}
                     </div>
-                    <IconButton className="action_button">
-                        <ChatIcon />
-                    </IconButton>
-                    <IconButton className="inactive_button" disabled={true}>
-                        <DonutLargeIcon />
-                    </IconButton>
+                    <Tooltip classes={classesTooltip} title="Friends Room" placement="left" arrow>
+                        <IconButton className="action_button_selected">
+                            <ChatIcon />
+                        </IconButton>
+                    </Tooltip>
                 </div>
 
                 <div className="sidebar__left__footer">
-                    <IconButton className='online_button'
-                        onClick={() => logout()} >
-                        {onlineStatus ? <ToggleOnIcon /> : <ToggleOffIcon />}
-                    </IconButton>
+                    <Tooltip classes={classesTooltip} title="Logout" placement="left" arrow>
+                        <IconButton className='online_button'
+                            onClick={() => logout()} >
+                            {onlineStatus ? <ToggleOnIcon /> : <ToggleOffIcon />}
+                        </IconButton>
+                    </Tooltip>
                 </div>
             </div>
             <div className="sidebar__right">
@@ -149,19 +169,23 @@ function Sidebar({ user }) {
                             index={index}
                             key={index}
                             roomId={item[0]}
-                            isSelected={room.id===item[0]}
+                            isSelected={room.id === item[0]}
+                            unreadNum={item[1].unreadNum}
+                            roomStatus={item[1].status}
                         />
                     ))
                     }
                 </div>
                 <div className={`add__fab ${classes.fab}`}>
-                    <Fab color="primary" aria-label="add"
-                        className={classes.fab}
-                        onClick={() => {
-                            openFriendsModel()
-                        }}>
-                        <PersonAddIcon />
-                    </Fab>
+                    <Tooltip classes={classesTooltip} title="Add Friends" placement="left" arrow>
+                        <Fab color="primary" aria-label="add"
+                            className={classes.fab}
+                            onClick={() => {
+                                openFriendsModel()
+                            }}>
+                            <PersonAddIcon />
+                        </Fab>
+                    </Tooltip>
                 </div>
             </div>
             <RequestsModal
@@ -173,7 +197,7 @@ function Sidebar({ user }) {
                 isOpen={friendsModelIsOpen}
                 handleClose={handleClose}
             />
-        </div>
+        </div >
     )
 }
 

@@ -46,11 +46,33 @@ function RequestsModal({ isOpen, closeRequests, element }) {
     }
   }
 
-  const rejectRequest = async (index) => {
+  const rejectRequest = async (index, personId, name, status, setLoadingReject) => {
+    setLoadingReject(true)
     try {
-
+      const res = await axios.post('/friends/reject_request', {
+        userId: user._id,
+        friendId: personId
+      })
+      if (!res ) {
+        throw new Error('empty response')
+      }
+      if(!res.data.success){
+        alert('server error')
+        throw new Error('server error')
+      }
+      let presentRequests = [...requests]
+      presentRequests.splice(index, 1) // remove the request
+      dispatch({
+        type: "RESET_REQUESTS",
+        item: presentRequests
+      })
+      dispatch({
+        type: "DECREMENT_REQUESTS_COUNTER"
+      })
     } catch (err) {
       console.log(err)
+    } finally {
+      setLoadingReject(false)
     }
   }
 

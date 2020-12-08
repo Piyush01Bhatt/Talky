@@ -99,6 +99,8 @@ export const Register = props => {
         {loading && <CircularProgress size={24} className={classes.buttonProgress}/>}
       </div>
       <OtpModal isOpen={modalIsOpen} close={close}
+        userName={userInput.name}
+        userPassword={userInput.password}
         element={document.getElementById('talky')}
         userEmail={userInput.email}/>
     </div>

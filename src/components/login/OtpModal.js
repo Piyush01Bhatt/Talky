@@ -15,13 +15,22 @@ const useStyles = makeStyles((theme)=> ({
     left: '50%',
     marginTop: -12,
     marginLeft: -12,
+  },
+  resendButtonProgress: {
+    color: 'green',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -17,
+    marginLeft: -17,
   }
 }))
 
-function OtpModal ({ isOpen, close, element, userEmail }) {
+function OtpModal ({ isOpen, close, element, userEmail, userName, userPassword }) {
   const classes = useStyles()
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [resendLoading, setResendLoading] = useState(false)
 
   const verify_otp = async () => {
     setLoading(true)
@@ -41,6 +50,24 @@ function OtpModal ({ isOpen, close, element, userEmail }) {
       alert(err.message)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const resendOtp = async () => {
+    setResendLoading(true)
+    try {
+      const res = await axios.post('/user/register', {
+        name: userName,
+        email: userEmail,
+        password: userPassword
+      })
+      if (res.data.success === true){
+        setResendLoading(false)
+        alert('otp resent')
+      }
+    } catch (err) {
+      console.log(err)
+      alert(err.message)
     }
   }
 
@@ -85,9 +112,18 @@ function OtpModal ({ isOpen, close, element, userEmail }) {
             {loading && <CircularProgress size={24} className={classes.buttonProgress}/>}
           </div>
           <div className="otp__resend">
-            <IconButton className="otpresend__button">
-              <AutorenewIcon className="otpresend__icon" />
+            <IconButton onClick={()=>resendOtp()} className="otpresend__button" disabled={resendLoading}>
+              <AutorenewIcon 
+              className="otpresend__icon" 
+              style={
+                resendLoading ? {
+                  color: '#e0e0e0 !important'
+                } : {
+                  color: '#454fbe !important'
+                }
+              } />
             </IconButton>
+            {resendLoading && <CircularProgress size={34} className={classes.resendButtonProgress}/>}
           </div>
         </div>
       </div>

@@ -42,6 +42,7 @@ export const reducer = (state, action) => {
 
 
     case "LOGOUT":
+      localStorage.clear()
       return {
         ...initialState
       }
@@ -113,13 +114,6 @@ export const reducer = (state, action) => {
     case "ADD_RECEIVED_MESSAGE":
       /*const modified = {...state.recent_rooms}
       modified[action.item.from_id].messages.push(action.item)*/
-      /*if(!(state.room.id === action.item.from_id)){
-        const modified = {
-          ...state.recent_rooms[action.item.from_id],
-          messages: [...state.recent_rooms[action.item.from_id].messages, action.item],
-          unreadNum: 0
-        }
-      }*/
       const modified = {
         ...state.recent_rooms[action.item.from_id],
         messages: [...state.recent_rooms[action.item.from_id].messages, action.item],
