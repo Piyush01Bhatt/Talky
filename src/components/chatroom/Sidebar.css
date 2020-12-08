@@ -134,6 +134,11 @@
     margin-top: 8px;
 }
 
+.sidebar__chats__empty{
+    flex:1;
+    margin-top: 8px;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .sidebar__chats::-webkit-scrollbar {
     display: none;

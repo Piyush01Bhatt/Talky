@@ -16,6 +16,7 @@ import ToggleOnIcon from '@material-ui/icons/ToggleOn';
 import ToggleOffIcon from '@material-ui/icons/ToggleOff';
 import { useSocket } from "./SocketProvider";
 import Tooltip from '@material-ui/core/Tooltip';
+import EmptyFriendList from './EmptyFriendList'
 
 const useStyles = makeStyles((theme) => ({
     fab: {
@@ -49,6 +50,7 @@ function Sidebar({ user }) {
     const [{ room, recent_rooms, onlineStatus, requestsCounter }, dispatch] = useStateValue();
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [friendsModelIsOpen, setFriendsModelIsOpen] = useState(false)
+    const [friendsLoading, setFriendsLoading] = useState(false)
     const socket = useSocket();
     const classes = useStyles();
     const classesTooltip = useStylesBootstrap();
@@ -66,6 +68,7 @@ function Sidebar({ user }) {
 
     useEffect(() => {
         (async function loadFriendList() {
+            setFriendsLoading(true)
             const res = await axios.get(`/friends/get_friendlist/${user._id}/${1}/${30}`)
             const addItem = {}
             console.log(res.data.data)
@@ -82,6 +85,7 @@ function Sidebar({ user }) {
                 item: addItem,
                 type: 'ADD_ROOM'
             })
+            setFriendsLoading(false)
         })()
     }, [])
 
@@ -161,8 +165,8 @@ function Sidebar({ user }) {
                     </div>
                 </div>
 
-                <div className="sidebar__chats">
-                    {(emptyCheck(recent_rooms)) ? <CircularProgress size={34} className={classes.buttonProgress} /> : Object.entries(recent_rooms).sort(compareRooms).map((item, index) => (
+                <div className={(emptyCheck(recent_rooms)) ? "sidebar__chats__empty":"sidebar__chats"}>
+                    {(emptyCheck(recent_rooms)) ? <EmptyFriendList/> :Object.entries(recent_rooms).sort(compareRooms).map((item, index) => (
                         <SidebarChat
                             onClick={processRoomClick}
                             roomName={item[1].name}
@@ -175,6 +179,7 @@ function Sidebar({ user }) {
                         />
                     ))
                     }
+                    {friendsLoading && <CircularProgress size={34} className={classes.buttonProgress} /> }
                 </div>
                 <div className={`add__fab ${classes.fab}`}>
                     <Tooltip classes={classesTooltip} title="Add Friends" placement="left" arrow>

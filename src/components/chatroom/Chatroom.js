@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Chatroom.css";
 import { useStateValue } from "../../StateProvider";
 import EmptyChatPage from './EmptyChatPage'
@@ -52,7 +52,7 @@ function Chatroom({ user }) {
   return (
     <div className="chatroom__main" id="chatroom">
       <div className="chatroom__body" id="chatroomBody">
-        <Sidebar user={user} />
+        <Sidebar user={user}/>
         {emptyCheck(room)?<EmptyChatPage/>:<Chat sendMessage={sendMessage} />}
       </div>
     </div>
