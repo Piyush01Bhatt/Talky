@@ -37,7 +37,7 @@ export const Login = props => {
             <input
               type='text'
               name='username'
-              placeholder='username'
+              placeholder='email'
               onChange={props.processLoginEmail}
             />
           </div>
