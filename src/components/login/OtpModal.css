@@ -1,15 +1,32 @@
-.Overlay {
-  z-index: 100;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(69, 74, 94,0.7);
-  padding: 3.2rem;
-  text-align: center;
-  border-bottom-right-radius: 25px !important;
-  border-top-right-radius: 25px !important;
+@media (min-width: 500px) {
+  .Overlay {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(69, 74, 94,0.7);
+    padding: 3.2rem;
+    text-align: center;
+    border-bottom-right-radius: 25px ;
+    border-top-right-radius: 25px ;
+  }
+}
+
+@media (max-width: 500px) {
+  .Overlay {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(69, 74, 94,0.7);
+    padding: 3.2rem;
+    text-align: center;
+    border-radius: none !important;
+  }
 }
 
 .Otp__Modal {
@@ -120,3 +137,4 @@
     font-weight: bold !important;
     color: #454FBE !important;
 }
+

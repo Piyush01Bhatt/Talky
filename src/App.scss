@@ -57,30 +57,85 @@
 }
 
 // login Main Container
-.login {
-  height: 100%;
-  flex:0.35;
-  //min-height: 44em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-top-right-radius: 25px !important;
-  border-bottom-right-radius: 25px !important;
-  background-color: #f3f3fa;
-  .container {
+@media (min-width: 500px) {
+  .login {
+    height: 100%;
+    flex:0.35;
+    //min-height: 44em;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    //transition: transform 200ms ease-in-out;
-  }
-    .text {
-      font-size: 21px;
-      font-weight: 500;
-      color: #fff;
-      margin-right: 3em;
-      margin-left: 3em;
+    border-top-right-radius: 25px ;
+    border-bottom-right-radius: 25px ;
+    background-color: #f3f3fa;
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      //transition: transform 200ms ease-in-out;
     }
+      .text {
+        font-size: 21px;
+        font-weight: 500;
+        color: #fff;
+        margin-right: 3em;
+        margin-left: 3em;
+      }
+  }
+}
+
+@media (max-width: 500px) {
+  .banner{
+    display: none;
+  }
+  .app {
+    text-align: center;
+    display: flex;
+    height:100vh;
+    width:100vw;
+    justify-content: center;
+    align-items:center;
+    font-family: "Open Sans", sans-serif;
+    background-color: #f3f3fa;
+  }
+  .app__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    height:100vh;
+    width:100vw;
+  }
+
+  .login {
+    height: 100%;
+    flex:1;
+    //min-height: 44em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3fa;
+    border-top-right-radius: none !important ;
+    border-bottom-right-radius: none !important;
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      //transition: transform 200ms ease-in-out;
+    }
+      .text {
+        font-size: 21px;
+        font-weight: 500;
+        color: #fff;
+        margin-right: 3em;
+        margin-left: 3em;
+      }
+  }
 }

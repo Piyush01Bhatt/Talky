@@ -1,5 +1,6 @@
 import { Button, CircularProgress } from '@material-ui/core'
 import React, { useState } from 'react'
+import './style.scss'
 import talkyLogo from '../../talky_logo.png'
 import OtpModal from './OtpModal'
 import axios from '../../helpers/axios'
@@ -32,7 +33,7 @@ export const Register = props => {
 
   const open = async () => {
     setLoading(true)
-    try {
+    /*try {
       const res = await axios.post('/user/register', {
         name: userInput.name,
         email: userInput.email,
@@ -46,7 +47,9 @@ export const Register = props => {
       console.log(err.message)
       setLoading(false)
       alert('registration failed')
-    }
+    }*/
+    setLoading(false)
+    setModalIsOpen(true)
   }
 
   return (
