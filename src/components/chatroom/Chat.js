@@ -3,15 +3,11 @@ import dayjs from "dayjs"
 import relativeTime from 'dayjs/plugin/relativeTime'
 import "./Chat.css";
 import { Avatar, IconButton } from "@material-ui/core";
-import {
-  AttachFile
-} from "@material-ui/icons";
 import SendIcon from '@material-ui/icons/Send';
 import ChatMessage from "./ChatMessage";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ChatReceiver from "./ChatReceiver";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-import MicIcon from "@material-ui/icons/Mic";
 import { useStateValue } from "../../StateProvider";
 import { useMediaQuery } from 'react-responsive'
 
@@ -53,9 +49,6 @@ function Chat({ sendMessage }) {
         </div>
 
         <div className="chat__headerRight">
-          {/*<IconButton className="inactive__button" disabled={true}>
-            <AttachFile className="attach__icon" />
-  </IconButton>*/}
         </div>
       </div>
 
@@ -106,23 +99,6 @@ function Chat({ sendMessage }) {
                 isBigScreen? setInputRows((input.length / inpW) + 1 + entersRow):setInputRows((input.length / 40) + 1)
               }}
               rows={Math.min(4, inputRows)} autoFocus={true} />
-            {/*<form>
-              <input
-                value={input}
-                onChange={(e) => {
-
-                  setInput(e.target.value)
-                }}
-                placeholder="Type a message"
-                type="text"
-              />
-              <button onClick={(e) => {
-                sendMessage(e, input)
-                setInput('')
-              }} type="submit">
-                Send a Message
-              </button>
-            </form>*/}
           </div>
           <div className="micdiv">
             <IconButton onClick={(e) => {
