@@ -5,7 +5,7 @@ import "../../App.scss";
 import banner from "../../manage_chats.svg"
 import ReactCardFlip from 'react-card-flip';
 
-function LoginRoom({flipStyle, isFlipped, processLogin, processLoginEmail, processLoginPassword, flip}) {
+function LoginRoom({ flipStyle, isFlipped, processLogin, processLoginEmail, processLoginPassword, flip }) {
   return (
     <div className="app__container">
       <div className="banner">
@@ -26,7 +26,7 @@ function LoginRoom({flipStyle, isFlipped, processLogin, processLoginEmail, proce
               processLoginPassword={processLoginPassword}
               flip={flip}
             />
-            <Register 
+            <Register
               flip={flip}
             />
           </ReactCardFlip>

@@ -5,20 +5,31 @@
     height: 100% !important;
     flex-direction: column;
     align-items:center;
+    justify-content: center;
     background-color:white; 
     border-bottom-right-radius: 25px;
     border-top-right-radius: 25px;
 
+    .base-container-body {
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content: center;
+        background-color:white;
+        margin-bottom: 100px;
+    }
+
     .topHeader{
         display: flex;
+        margin-top: 0px;
+        margin-bottom: 50px;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
     }
 
     .mui__button > button{
-        margin-right: 130px;
-        margin-bottom: 100px;
-        margin-top: 20px;
+        margin-left: 15px;
         padding:8px;
         height: 40px;
         width: 6em;
@@ -38,7 +49,7 @@
           margin-top: 8px;
           width:8em;
           height:4em;
-          margin-left:130px;
+          margin-right:15px;
       }
       
       .topHeader > button:focus{
@@ -135,19 +146,31 @@
         height: 100% !important;
         flex-direction: column;
         align-items:center;
+        justify-content: center;
         background-color:white;
+
+        .base-container-body {
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+            background-color:white;
+            margin-bottom: 100px;
+        }
 
         .topHeader{
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            margin-top: 0px;
+            margin-bottom: 100px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
         }
     
         .mui__button > button{
-            margin-right: 130px;
-            margin-bottom: 100px;
-            margin-top: 20px;
             padding:8px;
+            margin-left: 15px;
             height: 40px;
             width: 6em;
             text-transform: none !important;
@@ -166,7 +189,7 @@
               margin-top: 8px;
               width:8em;
               height:4em;
-              margin-left:130px;
+              margin-right: 15px;
           }
           
           .topHeader > button:focus{
@@ -182,14 +205,6 @@
         .content {
             display: flex;
             flex-direction: column;
-    
-            .image {
-                width:21em;
-                img {
-                    width:100%;
-                    height: 100%;
-                }
-            }
         }
     
         .form {
@@ -240,7 +255,7 @@
                 font-weight: bold;
                 padding: 5px 20px;
                 border: 0;
-                min-width: 25.5em;
+                min-width: 20em;
                 height:47px;         
                 text-transform: none !important;
                 border-radius:3px;

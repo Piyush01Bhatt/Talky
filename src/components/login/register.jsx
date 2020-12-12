@@ -33,7 +33,7 @@ export const Register = props => {
 
   const open = async () => {
     setLoading(true)
-    /*try {
+    try {
       const res = await axios.post('/user/register', {
         name: userInput.name,
         email: userInput.email,
@@ -47,14 +47,13 @@ export const Register = props => {
       console.log(err.message)
       setLoading(false)
       alert('registration failed')
-    }*/
-    setLoading(false)
-    setModalIsOpen(true)
+    }
   }
 
   return (
     <div className="base-container" id="register_base">
-      <div className="topHeader">
+       <div className="base-container-body">
+       <div className="topHeader">
         <img src={talkyLogo} alt="talky"></img>
         <div className='mui__button'>
           <Button onClick={() => props.flip()}>Sign in</Button>
@@ -101,7 +100,9 @@ export const Register = props => {
         </Button>
         {loading && <CircularProgress size={24} className={classes.buttonProgress}/>}
       </div>
-      <OtpModal isOpen={modalIsOpen} close={close}
+
+       </div>
+            <OtpModal isOpen={modalIsOpen} close={close}
         userName={userInput.name}
         userPassword={userInput.password}
         element={document.getElementById('talky')}

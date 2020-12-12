@@ -14,3 +14,23 @@
   border-top-left-radius: 25px !important;
   border-bottom-left-radius: 25px !important;
 }
+
+@media (max-width: 500px) {
+  .chatroom__main {
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+  }
+  .chatroom__body {
+    display: flex;
+    position: relative;
+    border-radius: 0px ;
+    flex-direction: column;
+    background-color: #f9f9fc;
+    margin-top: 0px;
+    height:100vh;
+    width:100vw;
+    box-shadow: none;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+  }
+}

@@ -73,3 +73,20 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+@media (max-width: 500px) {
+    .my__friends__body {
+        background-color: white;
+        border: none !important;
+        outline: none !important;
+        height: 80vh;
+        width: 80vw;
+        overflow-x: hidden !important;
+    }
+
+    .findFriendModal__body{
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+    }
+}

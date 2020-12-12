@@ -1,14 +1,16 @@
 import React from "react";
 import "./Chatroom.css";
 import { useStateValue } from "../../StateProvider";
-import EmptyChatPage from './EmptyChatPage'
-import Chat from "./Chat";
-import Sidebar from "./Sidebar";
 import { useSocket } from "./SocketProvider";
+import { useMediaQuery } from 'react-responsive'
+import BigScreenChatroom from './BigScreenChatroom'
+import SmallScreenChatroom from './SmallScreenChatroom'
 
 function Chatroom({ user }) {
   const [{ room, recent_rooms },] = useStateValue();
   const socket = useSocket();
+
+  const isBigScreen = useMediaQuery({ query: '(min-device-width: 500px)' })
 
   const sendMessage = (e, message) => {
     /*dispatch({
@@ -44,16 +46,19 @@ function Chatroom({ user }) {
     });
   };
 
-  function emptyCheck(value) {
-    return Object.keys(value).length === 0
-      && value.constructor === Object;
-  }
-
   return (
     <div className="chatroom__main" id="chatroom">
       <div className="chatroom__body" id="chatroomBody">
-        <Sidebar user={user}/>
-        {emptyCheck(room)?<EmptyChatPage/>:<Chat sendMessage={sendMessage} />}
+        {isBigScreen ? <BigScreenChatroom user={user}
+          sendMessage={sendMessage}
+          room={room}
+        />
+          :
+          <SmallScreenChatroom user={user}
+            sendMessage={sendMessage}
+            room={room}
+          />
+        }
       </div>
     </div>
   );

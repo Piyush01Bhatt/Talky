@@ -15,6 +15,7 @@
     "react-card-flip": "^1.0.11",
     "react-dom": "^16.13.1",
     "react-modal": "^3.11.2",
+    "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.0",
     "socket.io-client": "^2.3.0"

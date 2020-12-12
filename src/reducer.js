@@ -69,6 +69,11 @@ export const reducer = (state, action) => {
         }
       };
 
+    case 'UNSET_ROOM': return {
+      ...state,
+      room: {}
+    }
+
     case "ADD_ROOM":
       return {
         ...state,
@@ -117,9 +122,9 @@ export const reducer = (state, action) => {
       const modified = {
         ...state.recent_rooms[action.item.from_id],
         messages: [...state.recent_rooms[action.item.from_id].messages, action.item],
-        unreadNum: (state.room.id === action.item.from_id)?0:state.recent_rooms[action.item.from_id].unreadNum + 1
+        unreadNum: (state.room.id === action.item.from_id) ? 0 : state.recent_rooms[action.item.from_id].unreadNum + 1
       }
-      
+
       return {
         ...state,
         recent_rooms: {

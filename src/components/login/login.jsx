@@ -22,6 +22,7 @@ export const Login = props => {
 
   return (
     <div className='base-container'>
+      <div className="base-container-body">
       <div className='topHeader'>
         <img src={talkyLogo} alt='talky'></img>
         <div className='mui__button'>
@@ -69,6 +70,7 @@ export const Login = props => {
           Login
         </Button>
         {loading && <CircularProgress size={24} className={classes.buttonProgress}/>}
+      </div>
       </div>
     </div>
   )

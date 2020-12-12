@@ -1,13 +1,15 @@
 import React from 'react'
 import './ChatReceiver.css'
 
-function ChatReceiver (props) {
+function ChatReceiver(props) {
   return (
-    <p className="chat__receiver">
-      <span className="chat__name">{props.name}</span>
-      {props.messageBody}
-      <span className="chat__timestamp">{props.timestamp}</span>
-    </p>
+    <div className="chat__receiver__body">
+      <p className="chat__receiver">
+        <span className="chatreceiver__name">{props.name}</span>
+        {props.messageBody}
+      </p>
+      <p className="chatreceiver__timestamp">{props.timestamp}</p>
+    </div>
   )
 }
 

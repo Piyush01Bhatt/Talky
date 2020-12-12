@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import "./FriendSearchList.css"
 import { Avatar, IconButton } from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
@@ -11,16 +11,16 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import PersonIcon from '@material-ui/icons/Person';
 
-const useStyles = makeStyles((theme)=> ({
+const useStyles = makeStyles((theme) => ({
     buttonProgress: {
-      color: green[500],
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      marginTop: -18,
-      marginLeft: -18,
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -18,
+        marginLeft: -18,
     }
-  }))
+}))
 
 function FriendsSearchList({ name, status, personId, index, user, received, requested, accepted, isSelf }) {
     const classes = useStyles();
@@ -36,7 +36,7 @@ function FriendsSearchList({ name, status, personId, index, user, received, requ
                 status: status,
                 fo_id: user._id
             })
-            if (res){
+            if (res) {
                 setLoading(false)
                 setSuccess(true)
             }
@@ -49,28 +49,30 @@ function FriendsSearchList({ name, status, personId, index, user, received, requ
 
     const getIcon = () => {
 
-        if(isSelf) {
-            return <PersonIcon className="request__icon"/>
+        if (isSelf) {
+            return <PersonIcon className="request__icon" />
         }
 
         if (requested && !accepted) {
-            return <CheckIcon className="request__icon"/>
+            return <CheckIcon className="request__icon" />
         }
         if (received && !accepted) {
-            return <ArrowDownwardIcon className="request__icon"/>
+            return <ArrowDownwardIcon className="request__icon" />
         }
         if (accepted) {
-            return <DoneAllIcon className="request__icon"/>
+            return <DoneAllIcon className="request__icon" />
         }
         if (success) {
-            return <CheckIcon className="request__icon"/>
+            return <CheckIcon className="request__icon" />
         }
 
-        return <PersonAddIcon className="request__icon"/>
+        return <PersonAddIcon className="request__icon" />
     }
     return (
         <div className="list__main">
-            <Avatar className="list__avatar" />
+            <div className="friendsSearchList__avatar__div">
+                <Avatar className="list__avatar" />
+            </div>
             <div className="list__info">
                 <h2>{name}</h2>
                 <p>{status}</p>
@@ -81,7 +83,7 @@ function FriendsSearchList({ name, status, personId, index, user, received, requ
                     className="send__request">
                     {getIcon()}
                 </IconButton>
-                {loading && <CircularProgress size={38} className={classes.buttonProgress}/>}
+                {loading && <CircularProgress size={38} className={classes.buttonProgress} />}
             </div>
         </div>
     )

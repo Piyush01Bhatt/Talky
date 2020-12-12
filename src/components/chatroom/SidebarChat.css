@@ -1,6 +1,6 @@
 .sidebarChat {
     display:flex;
-    height: 60px;
+    height: 50px;
     padding:10px;
     cursor:pointer;
     border-bottom: 1px solid #ededed;
@@ -10,7 +10,7 @@
 
 .sidebarChat_selected{
     display:flex;
-    height: 60px;
+    height: 50px;
     padding:10px;
     cursor:pointer;
     border-bottom: 1px solid #ededed;
@@ -56,6 +56,10 @@
     flex-direction: row;
 }
 
+.sidebarChat__avatar {
+    z-index: 1;
+}
+
 .sidebarChat__unreadNum {
     background-color: #f37677;
     border-bottom-left-radius: 5px;
@@ -77,4 +81,32 @@
 .status__online {
     font-size: 12px !important;
     color: green !important;
+}
+
+@media (max-width: 500px) {
+    .sidebarChat {
+        display:flex;
+        height: 50px;
+        padding:10px;
+        cursor:pointer;
+        border-bottom: 1px solid #ededed;
+        align-items: center;
+    }
+    
+    
+    .sidebarChat_selected{
+        display:flex;
+        height: 50px;
+        padding:10px;
+        cursor:pointer;
+        border-bottom: 1px solid #ededed;
+        align-items: center;
+        /*background-color:#ebebeb*/
+        border-left: 3px solid red;
+        /*background-color: #f8dadc;*/
+        background-image: linear-gradient(to right,#f8d9db,#f9f9fc);
+        /*background-color: white;*/
+        margin-right: 0px;
+    }
+
 }

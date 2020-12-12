@@ -8,16 +8,16 @@ import { makeStyles } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 
-const useStyles = makeStyles((theme)=> ({
+const useStyles = makeStyles((theme) => ({
     buttonProgress: {
-      color: green[500],
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      marginTop: -18,
-      marginLeft: -18,
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -18,
+        marginLeft: -18,
     }
-  }))
+}))
 
 function RequestList({ name, status, personId, index, user, acceptRequest, rejectRequest, isOnline }) {
     const classes = useStyles();
@@ -26,22 +26,24 @@ function RequestList({ name, status, personId, index, user, acceptRequest, rejec
 
     return (
         <div className="list__main">
-            <Avatar className="list__avatar"/>
+            <div className="list__avatar__div">
+                <Avatar className="list__avatar" />
+            </div>
             <div className="list__info">
                 <h2>{name}</h2>
                 <p>{status}</p>
             </div>
             <div className="accept__fab">
-                <IconButton onClick={(e)=>acceptRequest(index,personId,name,status,isOnline,setLoadingAccept)}>
+                <IconButton onClick={(e) => acceptRequest(index, personId, name, status, isOnline, setLoadingAccept)}>
                     <CheckIcon className="accept__icon" />
                 </IconButton>
-                {loadingAccept && <CircularProgress size={38} className={classes.buttonProgress}/>}
+                {loadingAccept && <CircularProgress size={38} className={classes.buttonProgress} />}
             </div>
             <div className="reject__fab">
-                <IconButton onClick={()=>rejectRequest(index,personId,name,status,setLoadingReject)}>
+                <IconButton onClick={() => rejectRequest(index, personId, name, status, setLoadingReject)}>
                     <CloseIcon className="reject__icon" />
                 </IconButton>
-                {loadingReject && <CircularProgress size={38} className={classes.buttonProgress}/>}
+                {loadingReject && <CircularProgress size={38} className={classes.buttonProgress} />}
             </div>
         </div>
     )

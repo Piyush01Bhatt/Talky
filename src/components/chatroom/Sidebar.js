@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         top: '50%',
         left: '50%',
-        marginTop: 10,
-        marginLeft: 10,
+        marginTop: -15,
+        marginLeft: -15,
     }
 }));
 
@@ -66,27 +66,35 @@ function Sidebar({ user }) {
         })
     }
 
+    function emptyCheck(value) {
+        return Object.keys(value).length === 0
+            && value.constructor === Object
+    }
+
+
     useEffect(() => {
-        (async function loadFriendList() {
-            setFriendsLoading(true)
-            const res = await axios.get(`/friends/get_friendlist/${user._id}/${1}/${30}`)
-            const addItem = {}
-            console.log(res.data.data)
-            res.data.data.forEach((item, i) => {
-                addItem[item.friendId] = {
-                    name: item.name,
-                    status: item.status,
-                    messages: [],
-                    isOnline: item.isOnline,
-                    unreadNum: 0,
-                }
-            })
-            dispatch({
-                item: addItem,
-                type: 'ADD_ROOM'
-            })
-            setFriendsLoading(false)
-        })()
+        if (emptyCheck(recent_rooms)){
+            (async function loadFriendList() {
+                setFriendsLoading(true)
+                const res = await axios.get(`/friends/get_friendlist/${user._id}/${1}/${30}`)
+                const addItem = {}
+                console.log(res.data.data)
+                res.data.data.forEach((item, i) => {
+                    addItem[item.friendId] = {
+                        name: item.name,
+                        status: item.status,
+                        messages: [],
+                        isOnline: item.isOnline,
+                        unreadNum: 0,
+                    }
+                })
+                dispatch({
+                    item: addItem,
+                    type: 'ADD_ROOM'
+                })
+                setFriendsLoading(false)
+            })()
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -100,11 +108,6 @@ function Sidebar({ user }) {
 
     const openFriendsModel = async () => {
         setFriendsModelIsOpen(true)
-    }
-
-    function emptyCheck(value) {
-        return Object.keys(value).length === 0
-            && value.constructor === Object
     }
 
     const logout = () => {
